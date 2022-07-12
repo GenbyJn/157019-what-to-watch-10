@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute } from '../../common';
+import { AppRoute, AuthorizationStatus } from '../../common';
 import MainScreen from '../../pages/main-screen/main-screen';
 import ErrorScreen from '../../pages/error-screen/error-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -7,6 +7,7 @@ import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import FilmScreen from '../../pages/film-screen/film-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
+import PrivateRoute from '../private-route/private-route';
 
 const App = (): JSX.Element => (
   <BrowserRouter>
@@ -37,7 +38,12 @@ const App = (): JSX.Element => (
 
       <Route
         path={AppRoute.MyList}
-        element={<MyListScreen/>}
+
+        element={
+          <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <MyListScreen/>
+          </PrivateRoute>
+        }
       />
 
       <Route
