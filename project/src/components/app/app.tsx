@@ -14,7 +14,7 @@ const App = (): JSX.Element => (
     <Routes>
 
       <Route
-        path={AppRoute.Root}
+        path={AppRoute.Main}
         element={
           <MainScreen
             filmCardCount='12'
@@ -24,11 +24,6 @@ const App = (): JSX.Element => (
             poster='img/the-grand-budapest-hotel-poster.jpg'
           />
         }
-      />
-
-      <Route
-        path={AppRoute.Error}
-        element={<ErrorScreen/>}
       />
 
       <Route
@@ -59,6 +54,11 @@ const App = (): JSX.Element => (
       <Route
         path={AppRoute.Player}
         element={<PlayerScreen/>}
+      />
+
+      <Route
+        path="*"
+        element={<ErrorScreen />}
       />
 
     </Routes>
