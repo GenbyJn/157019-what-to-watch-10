@@ -1,4 +1,4 @@
-const SmallFilmCard = () => (
+const SmallFilmCard = (): JSX.Element => (
   <article className="small-film-card catalog__films-card">
     <div className="small-film-card__image">
       <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
