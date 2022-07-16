@@ -8,7 +8,10 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
+import filmsData from '../../mocks/films';
 
+// eslint-disable-next-line no-console
+console.log(filmsData);
 const App = (): JSX.Element => (
   <BrowserRouter>
     <Routes>
