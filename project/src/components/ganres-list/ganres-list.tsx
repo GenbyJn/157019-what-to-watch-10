@@ -1,4 +1,4 @@
-const GanesList = () => (
+const GenresList = () => (
   <ul className="catalog__genres-list">
     <li className="catalog__genres-item catalog__genres-item--active">
       <a href="/#" className="catalog__genres-link">All genres</a>
@@ -33,4 +33,4 @@ const GanesList = () => (
   </ul>
 );
 
-export default GanesList;
+export default GenresList;

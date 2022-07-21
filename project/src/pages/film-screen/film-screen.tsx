@@ -1,5 +1,6 @@
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { AppRoute } from '../../common';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/film';
@@ -65,7 +66,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review </Link>
               </div>
             </div>
           </div>

@@ -4,13 +4,15 @@ import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/film';
 
 type MainScreenProps = {
-  filmCardCount: string
   promoFilm: Film
   filmsData: Film[]
 }
 
-const MainScreen = ({ filmCardCount, promoFilm, filmsData }: MainScreenProps): JSX.Element => {
+const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
   const { name, posterImage, backgroundImage, genre, released} = promoFilm;
+
+  const filmCardCount = filmsData.length;
+
   return (
     <>
       <section className="film-card">

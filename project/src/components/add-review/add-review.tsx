@@ -2,11 +2,16 @@ import { useState } from 'react';
 import Rating from '../rating/rating';
 
 const AddReview = (): JSX.Element => {
+
   const [comment, setComment] = useState<string>('');
+
+  const handleSubmit = (evt: { preventDefault: () => void; }) => {
+    evt.preventDefault();
+  };
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form">
+      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
         <Rating />
 
         <div className="add-review__text">

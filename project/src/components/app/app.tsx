@@ -15,14 +15,14 @@ type AppScreenProps = {
   promoFilm: Film
 }
 
-const App = ({filmsData, promoFilm}:AppScreenProps): JSX.Element => (
+const App = ({filmsData, promoFilm }:AppScreenProps): JSX.Element => (
   <BrowserRouter>
     <Routes>
 
       <Route
         path={AppRoute.Main}
         element={
-          <MainScreen filmsData={filmsData} promoFilm={promoFilm} filmCardCount={'8'} />
+          <MainScreen filmsData={filmsData} promoFilm={promoFilm} />
         }
       />
 
