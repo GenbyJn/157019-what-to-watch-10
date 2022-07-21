@@ -1,4 +1,5 @@
-export type Film = {
+export type Film =
+  {
   name: string;
   posterImage: string;
   previewImage: string;
@@ -16,4 +17,5 @@ export type Film = {
   isFavorite: boolean;
   videoLink: string;
   previewVideoLink: string;
-};
+  };
+

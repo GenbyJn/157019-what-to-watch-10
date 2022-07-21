@@ -1,3 +1,4 @@
+
 export enum AppRoute {
   Main = '/',
   SignIn = '/login',
@@ -12,3 +13,4 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+

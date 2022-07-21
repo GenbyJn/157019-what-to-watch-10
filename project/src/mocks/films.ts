@@ -1,6 +1,6 @@
 import { Film } from '../types/film';
 
-const filmsData: Film[] = [
+const FilmsData: Film[] = [
   {
     name: 'Snatch',
     posterImage: 'https://10.react.pages.academy/static/film/poster/Snatch.jpg',
@@ -20,7 +20,7 @@ const filmsData: Film[] = [
     genre: 'Comedy',
     released: 2000,
     id: 1,
-    isFavorite: false,
+    isFavorite: true,
     videoLink: 'https://10.react.pages.academy/static/film/video/matrix.mp4',
     previewVideoLink: 'https://10.react.pages.academy/static/film/video/dog.mp4'
   },
@@ -89,7 +89,7 @@ const filmsData: Film[] = [
     genre: 'Comedy',
     released: 2003,
     id: 4,
-    isFavorite: false,
+    isFavorite: true,
     videoLink: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     previewVideoLink: 'https://10.react.pages.academy/static/film/video/traffic.mp4'
   },
@@ -187,4 +187,6 @@ const filmsData: Film[] = [
   }
 ];
 
-export default filmsData;
+export default FilmsData;
+
+
