@@ -11,7 +11,7 @@ type FilmScreenProps = {
 const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const filmExample = filmsData.find(
+  const currentFilm = filmsData.find(
     (item) => item.id === Number(params.id)
   ) as Film;
   return (
@@ -19,7 +19,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={ filmExample.backgroundImage } alt={filmExample.name} />
+            <img src={ currentFilm.backgroundImage } alt={currentFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -42,17 +42,17 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmExample.name}</h2>
+              <h2 className="film-card__title">{currentFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{ filmExample.genre }</span>
-                <span className="film-card__year">{ filmExample.released }</span>
+                <span className="film-card__genre">{ currentFilm.genre }</span>
+                <span className="film-card__year">{ currentFilm.released }</span>
               </p>
 
               <div className="film-card__buttons">
                 <button
                   className="btn btn--play film-card__button"
                   type="button"
-                  onClick={()=> navigate(`/player/${filmExample.id}`)}
+                  onClick={()=> navigate(`/player/${currentFilm.id}`)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -75,7 +75,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={ filmExample.posterImage } alt={`${filmExample.name} poster`} width="218" height="327" />
+              <img src={ currentFilm.posterImage } alt={`${currentFilm.name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -94,7 +94,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">{ filmExample.rating.toString().replace(/\./g,',') }</div>
+                <div className="film-rating__score">{ currentFilm.rating.toString().replace(/\./g,',') }</div>
                 <p className="film-rating__meta">
                   <span className="film-rating__level">Very good</span>
                   <span className="film-rating__count">240 ratings</span>
@@ -102,11 +102,11 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
               </div>
 
               <div className="film-card__text">
-                <p>{filmExample.description}</p>
+                <p>{currentFilm.description}</p>
 
-                <p className="film-card__director"><strong>{ filmExample.director }</strong></p>
+                <p className="film-card__director"><strong>{ currentFilm.director }</strong></p>
 
-                <p className="film-card__starring"><strong>{ filmExample.starring }</strong></p>
+                <p className="film-card__starring"><strong>{ currentFilm.starring }</strong></p>
               </div>
             </div>
           </div>
