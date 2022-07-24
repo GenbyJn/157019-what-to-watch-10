@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AppRoute } from '../../common';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
+import FilmOverview from '../../components/film-overview/film-overview';
 import { Film } from '../../types/film';
 type FilmScreenProps = {
   filmsData: Film[]
@@ -14,6 +15,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
   const currentFilm = filmsData.find(
     (item) => item.id === Number(params.id)
   ) as Film;
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -93,21 +95,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
                 </ul>
               </nav>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{ currentFilm.rating.toString().replace(/\./g,',') }</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{currentFilm.description}</p>
-
-                <p className="film-card__director"><strong>{ currentFilm.director }</strong></p>
-
-                <p className="film-card__starring"><strong>{ currentFilm.starring }</strong></p>
-              </div>
+              <FilmOverview currentFilm={currentFilm} />
             </div>
           </div>
         </div>
