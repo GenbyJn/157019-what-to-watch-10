@@ -37,6 +37,6 @@ const FilmDetails = ({currentFilm}: FilmDetailsProps):JSX.Element => (
       </p>
     </div>
   </div>
-)
+);
 
 export default FilmDetails;
