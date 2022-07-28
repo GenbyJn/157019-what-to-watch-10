@@ -1,5 +1,5 @@
 import { Film } from '../../types/film';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 
 type SmallFilmCardProps = {
@@ -12,12 +12,14 @@ type SmallFilmCardProps = {
 const SmallFilmCard = ({film, activeCard, onMouseEnter, onMouseLeave}: SmallFilmCardProps): JSX.Element => {
 
   const isPlaying = film.id === activeCard;
+  const navigate = useNavigate();
 
   return (
     <article
       className = "small-film-card catalog__films-card"
       onMouseEnter = {() => onMouseEnter(film.id)}
       onMouseLeave = {onMouseLeave}
+      onClick={() => navigate(`/films/${film.id}`)}
     >
 
       <div className="small-film-card__image">

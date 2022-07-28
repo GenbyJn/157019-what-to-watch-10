@@ -48,7 +48,7 @@ const App = ({filmsData, promoFilm }:AppScreenProps): JSX.Element => (
 
       <Route
         path={AppRoute.AddReview}
-        element={<AddReviewScreen/>}
+        element={<AddReviewScreen filmsData={filmsData}/>}
       />
 
       <Route

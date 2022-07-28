@@ -1,10 +1,10 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { AppRoute } from '../../utils/common';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import FilmOverview from '../../components/film-overview/film-overview';
 import { Film } from '../../types/film';
+
 type FilmScreenProps = {
   filmsData: Film[]
 }
@@ -67,7 +67,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review </Link>
+                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review </Link>
               </div>
             </div>
           </div>

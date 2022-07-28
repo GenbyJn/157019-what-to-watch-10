@@ -1,10 +1,17 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import AddReview from '../../components/add-review/add-review';
 import Logo from '../../components/logo/logo';
+import { Film } from '../../types/film';
 
-const AddReviewScreen = ():JSX.Element => {
-  // eslint-disable-next-line no-console
-  console.log(useParams());
+type AddReviewScreenProps = {
+  filmsData: Film[]
+}
+
+const AddReviewScreen = ({filmsData}: AddReviewScreenProps):JSX.Element => {
+  const params = useParams();
+  const id = Number(params.id);
+  const currentFilm = filmsData.find((item) => item.id === id) as Film;
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -21,7 +28,7 @@ const AddReviewScreen = ():JSX.Element => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a href="/#" className="breadcrumbs__link">Add review</a>
@@ -42,7 +49,7 @@ const AddReviewScreen = ():JSX.Element => {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={currentFilm.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
 
