@@ -14,10 +14,9 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum FilmScore {
-  Bad = 'Bad',
-  Normal = 'Normal',
-  Good = 'Good',
-  VeryGood = 'Very good',
-  Awesome = 'Awesome',
+export enum Score {
+  Normal = 3,
+  Good = 5,
+  VeryGood = 8,
+  Awesome = 10,
 }

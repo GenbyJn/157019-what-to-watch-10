@@ -1,6 +1,6 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { AppRoute } from '../../common';
+import { AppRoute } from '../../utils/common';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import FilmOverview from '../../components/film-overview/film-overview';
@@ -12,9 +12,8 @@ type FilmScreenProps = {
 const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const currentFilm = filmsData.find(
-    (item) => item.id === Number(params.id)
-  ) as Film;
+  const id = Number(params.id);
+  const currentFilm = filmsData.find((item) => item.id === id) as Film;
 
   return (
     <>

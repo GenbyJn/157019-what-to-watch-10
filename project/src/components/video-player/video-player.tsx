@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Film } from '../../types/film';
 
-const TIMEOUT = 1000;
+const PLAY_TIMEOUT = 1000;
 
 type VideoPlayerProps = {
   film: Film
@@ -18,7 +18,7 @@ function VideoPlayer({ film, activeCard }: VideoPlayerProps): JSX.Element {
       if (activeCard === film.id) {
         videoRef.current?.play();
       }},
-    TIMEOUT
+    PLAY_TIMEOUT
     );
 
     if (activeCard !== film.id) {

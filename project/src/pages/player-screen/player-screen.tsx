@@ -8,8 +8,8 @@ type PlayerScreenProps = {
 
 const PlayerScreen = ({filmsData}: PlayerScreenProps): JSX.Element => {
   const params = useParams();
-
-  const film = filmsData.find((item) => item.id === Number(params.id));
+  const id = Number(params.id);
+  const film = filmsData.find((item) => item.id === id);
 
   if (film) {
     const {name, posterImage, videoLink} = film;
