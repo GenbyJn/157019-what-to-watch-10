@@ -31,7 +31,7 @@ function VideoPlayer({ film, activeCard }: VideoPlayerProps): JSX.Element {
   }, [activeCard, film.id]);
 
   return (
-    <video src={film.previewVideoLink} poster={film.previewImage} loop ref={videoRef} muted />
+    <video height="100%" width="100%" src={film.previewVideoLink} poster={film.previewImage} loop ref={videoRef} muted />
 
   );
 }
