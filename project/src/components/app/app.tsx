@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../common';
+import { AppRoute, AuthorizationStatus } from '../../utils/common';
 import MainScreen from '../../pages/main-screen/main-screen';
 import ErrorScreen from '../../pages/error-screen/error-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -48,7 +48,7 @@ const App = ({filmsData, promoFilm }:AppScreenProps): JSX.Element => (
 
       <Route
         path={AppRoute.AddReview}
-        element={<AddReviewScreen/>}
+        element={<AddReviewScreen filmsData={filmsData}/>}
       />
 
       <Route

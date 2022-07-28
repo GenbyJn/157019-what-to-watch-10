@@ -6,15 +6,13 @@ type FilmsListProps = {
   filmsData: Film[];
 }
 
-
 const FilmsList = ({filmsData}: FilmsListProps): JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const handleMouseOn = (id: number) =>
-    setActiveCard(id);
+  const handleMouseOn = (id: number) => setActiveCard(id);
 
-  const handleMouseOut = () =>
-    setActiveCard(null);
+  const handleMouseOut = (): void => setActiveCard(null);
+
   return (
     <div className="catalog__films-list">
       {filmsData.map((film) =>

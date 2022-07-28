@@ -1,9 +1,10 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { AppRoute } from '../../common';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
+import FilmOverview from '../../components/film-overview/film-overview';
 import { Film } from '../../types/film';
+
 type FilmScreenProps = {
   filmsData: Film[]
 }
@@ -11,15 +12,15 @@ type FilmScreenProps = {
 const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
   const navigate = useNavigate();
   const params = useParams();
-  const filmExample = filmsData.find(
-    (item) => item.id === Number(params.id)
-  ) as Film;
+  const id = Number(params.id);
+  const currentFilm = filmsData.find((item) => item.id === id) as Film;
+
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={ filmExample.backgroundImage } alt={filmExample.name} />
+            <img src={ currentFilm.backgroundImage } alt={currentFilm.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -42,17 +43,17 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmExample.name}</h2>
+              <h2 className="film-card__title">{currentFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{ filmExample.genre }</span>
-                <span className="film-card__year">{ filmExample.released }</span>
+                <span className="film-card__genre">{ currentFilm.genre }</span>
+                <span className="film-card__year">{ currentFilm.released }</span>
               </p>
 
               <div className="film-card__buttons">
                 <button
                   className="btn btn--play film-card__button"
                   type="button"
-                  onClick={()=> navigate(`/player/${filmExample.id}`)}
+                  onClick={()=> navigate(`/player/${currentFilm.id}`)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -66,7 +67,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review </Link>
+                <Link to={`/films/${id}/review`} className="btn film-card__button">Add review </Link>
               </div>
             </div>
           </div>
@@ -75,7 +76,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={ filmExample.posterImage } alt={`${filmExample.name} poster`} width="218" height="327" />
+              <img src={ currentFilm.posterImage } alt={`${currentFilm.name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -93,21 +94,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
                 </ul>
               </nav>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{ filmExample.rating }</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{filmExample.description}</p>
-
-                <p className="film-card__director"><strong>{ filmExample.director }</strong></p>
-
-                <p className="film-card__starring"><strong>{ filmExample.starring }</strong></p>
-              </div>
+              <FilmOverview currentFilm={currentFilm} />
             </div>
           </div>
         </div>

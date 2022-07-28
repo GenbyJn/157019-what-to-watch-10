@@ -14,3 +14,9 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum Score {
+  Normal = 3,
+  Good = 5,
+  VeryGood = 8,
+  Awesome = 10,
+}
