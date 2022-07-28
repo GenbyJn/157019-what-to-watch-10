@@ -15,9 +15,9 @@ const SmallFilmCard = ({film, activeCard, onMouseEnter, onMouseLeave}: SmallFilm
 
   return (
     <article
-      className="small-film-card catalog__films-card"
-      onMouseEnter={() => onMouseEnter(film.id)}
-      onMouseLeave={onMouseLeave}
+      className = "small-film-card catalog__films-card"
+      onMouseEnter = {() => onMouseEnter(film.id)}
+      onMouseLeave = {onMouseLeave}
     >
 
       <div className="small-film-card__image">
