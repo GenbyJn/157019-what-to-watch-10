@@ -6,13 +6,10 @@ type FilmsListProps = {
   filmsData: Film[];
 }
 
-
 const FilmsList = ({filmsData}: FilmsListProps): JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const handleMouseOn = (id: number) => setActiveCard(id);
-  // eslint-disable-next-line no-console
-  console.log(activeCard);
 
   const handleMouseOut = (): void => setActiveCard(null);
 
