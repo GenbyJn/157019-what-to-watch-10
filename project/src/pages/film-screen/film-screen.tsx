@@ -1,10 +1,9 @@
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
-import FilmOverview from '../../components/film-overview/film-overview';
 import { Film } from '../../types/film';
 import TabMenu from '../../components/tab-menu/tab-menu';
+import SimilarFilms from '../../components/similar-films/similar-films';
 
 type FilmScreenProps = {
   filmsData: Film[]
@@ -82,9 +81,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
 
             <div className="film-card__desc">
 
-              <TabMenu />
-
-              <FilmOverview currentFilm={currentFilm} />
+              <TabMenu currentFilm={currentFilm}/>
 
             </div>
           </div>
@@ -92,13 +89,8 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
       </section>
 
       <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__films-list">
-            <FilmsList filmsData={[]} />
-          </div>
-        </section>
+        <SimilarFilms filmsData={filmsData} />
 
         <footer className="page-footer">
 

@@ -1,3 +1,4 @@
+export const SIMILAR_LIST_COUNT = 4;
 
 export enum AppRoute {
   Main = '/',
@@ -19,4 +20,10 @@ export enum Score {
   Good = 5,
   VeryGood = 8,
   Awesome = 10,
+}
+
+export enum TabNames {
+  Overview = 'OVERVIEW',
+  Details = 'DETAILS',
+  Reviews = 'REVIEWS'
 }
