@@ -25,7 +25,7 @@ const SmallFilmCard = ({film, activeCard, onMouseEnter, onMouseLeave}: SmallFilm
       <div className="small-film-card__image">
         {
           isPlaying
-            ? < VideoPlayer film={film} activeCard={activeCard}/>
+            ? < VideoPlayer film={film} activeCard={activeCard} />
             : <img src={film.previewImage} alt={film.name} width="280" height="175" />
         }
       </div>
