@@ -14,6 +14,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
   const params = useParams();
   const id = Number(params.id);
   const currentFilm = filmsData.find((item) => item.id === id) as Film;
+  const similarFilms = filmsData.filter((film) => (film.genre === currentFilm.genre) && (film.id !== currentFilm.id));
 
   return (
     <>
@@ -90,7 +91,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
 
       <div className="page-content">
 
-        <SimilarFilms filmsData={filmsData} />
+        <SimilarFilms similarFilms={similarFilms} />
 
         <footer className="page-footer">
 

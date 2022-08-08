@@ -4,10 +4,10 @@ import { SIMILAR_LIST_COUNT } from '../../utils/common';
 import SmallFilmCard from '../small-film-card/small-film-card';
 
 type SimilarFilmsProps = {
-  filmsData: Film[];
+  similarFilms: Film[];
 }
 
-const SimilarFilms = ({filmsData}: SimilarFilmsProps):JSX.Element => {
+const SimilarFilms = ({similarFilms}: SimilarFilmsProps):JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const handleMouseOn = (id: number) => setActiveCard(id);
   const handleMouseOut = (): void => setActiveCard(null);
@@ -17,7 +17,7 @@ const SimilarFilms = ({filmsData}: SimilarFilmsProps):JSX.Element => {
       <h2 className="catalog__title">More like this</h2>
 
       <div className="catalog__films-list">
-        {filmsData.map((film) =>
+        {similarFilms.map((film) =>
           (
             <SmallFilmCard
               key={film.id}

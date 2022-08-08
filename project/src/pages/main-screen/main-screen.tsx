@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import GanesList from '../../components/ganres-list/ganres-list';
+import GenresList from '../../components/ganres-list/ganres-list';
 import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/film';
 
@@ -75,7 +75,7 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GanesList />
+          <GenresList />
 
           <FilmsList filmsData={filmsData} />
 

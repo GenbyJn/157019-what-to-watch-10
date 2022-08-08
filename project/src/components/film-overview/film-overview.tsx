@@ -25,11 +25,7 @@ const FilmOverview = ({currentFilm}: FilmOverviewProps):JSX.Element => {
 
         <p className="film-card__starring"><strong>Starring: { starringList }</strong></p>
       </div>
-      {// eslint-disable-next-line no-console
-        console.log(currentFilm.rating)
-      }
     </>
-
   );
 };
 

@@ -1,4 +1,18 @@
 export const SIMILAR_LIST_COUNT = 4;
+export const DEFAULT_GENRE = 'All genres';
+
+export enum GanreList {
+  AllGenres = 'All genres',
+  Comedies = 'Comedies',
+  Crime = 'Crime',
+  Documentary = 'Documentary',
+  Dramas = 'Dramas',
+  Horror = 'Horror',
+  KidsAndFamily = 'Kids & Family',
+  Romance = 'Romance',
+  SciFi = 'Sci-Fi',
+  Thrillers = 'Thrillers',
+}
 
 export enum AppRoute {
   Main = '/',
@@ -22,7 +36,7 @@ export enum Score {
   Awesome = 10,
 }
 
-export enum TabNames {
+export enum TabName {
   Overview = 'OVERVIEW',
   Details = 'DETAILS',
   Reviews = 'REVIEWS'
