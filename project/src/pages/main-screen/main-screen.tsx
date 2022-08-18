@@ -4,6 +4,8 @@ import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/film';
 import { useAppSelector } from '../../hooks';
 import { DEFAULT_GENRE } from '../../utils/common';
+import ShowMore from '../../components/show-more/show-more';
+import Footer from '../../components/footer/footer';
 
 type MainScreenProps = {
   promoFilm: Film
@@ -86,19 +88,10 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
 
           <FilmsList genreFilms={genreFilms} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMore />
         </section>
 
-        <footer className="page-footer">
-
-          <Logo/>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );
