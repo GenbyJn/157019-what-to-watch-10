@@ -9,8 +9,8 @@ type SimilarFilmsProps = {
 
 const SimilarFilms = ({similarFilms}: SimilarFilmsProps):JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const handleMouseOn = (id: number) => setActiveCard(id);
-  const handleMouseOut = (): void => setActiveCard(null);
+  const handleMouseEnter = (id: number) => setActiveCard(id);
+  const handleMouseLeave = (): void => setActiveCard(null);
 
   return (
     <section className="catalog catalog--like-this">
@@ -23,8 +23,8 @@ const SimilarFilms = ({similarFilms}: SimilarFilmsProps):JSX.Element => {
               key={film.id}
               film={film}
               activeCard={activeCard}
-              onMouseEnter={handleMouseOn}
-              onMouseLeave={handleMouseOut}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             />
           )
         ).slice(0, SIMILAR_LIST_COUNT)}

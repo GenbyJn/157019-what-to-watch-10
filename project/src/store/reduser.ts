@@ -5,22 +5,22 @@ import { DEFAULT_GENRE } from '../utils/common';
 import { changeGenre, getFilms } from './action';
 
 type InitialStateTypes = {
-  genre: string;
   films: Film [];
+  genre: string
 }
 
 const initialState: InitialStateTypes = {
-  genre: DEFAULT_GENRE,
   films: films,
+  genre: DEFAULT_GENRE
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(changeGenre, (state, action) => {
-      state.genre = action.payload.ganre;
-    })
     .addCase(getFilms, (state, action) => {
       state.films = action.payload.films;
+    })
+    .addCase(changeGenre, (state, action) => {
+      state.genre = action.payload;
     });
 });
 

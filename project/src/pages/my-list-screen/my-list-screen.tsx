@@ -33,7 +33,7 @@ const MyListScreen = ({filmsData, favoriteCardCount}: MyListProps):JSX.Element =
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList filmsData={ favoriteFilms } />
+        <FilmsList genreFilms={ favoriteFilms } />
       </section>
 
       <footer className="page-footer">

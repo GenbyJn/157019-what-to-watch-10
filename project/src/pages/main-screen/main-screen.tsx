@@ -2,6 +2,8 @@ import Logo from '../../components/logo/logo';
 import GenresList from '../../components/ganres-list/ganres-list';
 import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import { DEFAULT_GENRE } from '../../utils/common';
 
 type MainScreenProps = {
   promoFilm: Film
@@ -10,8 +12,13 @@ type MainScreenProps = {
 
 const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
   const { name, posterImage, backgroundImage, genre, released} = promoFilm;
-
+  const currentGenre = useAppSelector((state) => state.genre);
   const filmCardCount = filmsData.length;
+
+  let genreFilms = filmsData.filter((item) => item.genre === currentGenre);
+  if (currentGenre === DEFAULT_GENRE) {
+    genreFilms = filmsData;
+  }
 
   return (
     <>
@@ -47,7 +54,7 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
             <div className="film-card__desc">
               <h2 className="film-card__title">{ name }</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{ genre }</span>
+                <span className="film-card__genre">{ genre } </span>
                 <span className="film-card__year">{ released }</span>
               </p>
 
@@ -75,9 +82,9 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList />
+          <GenresList FilmsData={filmsData}/>
 
-          <FilmsList filmsData={filmsData} />
+          <FilmsList genreFilms={genreFilms} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
