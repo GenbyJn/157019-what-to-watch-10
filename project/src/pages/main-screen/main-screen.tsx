@@ -14,9 +14,10 @@ type MainScreenProps = {
 const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
   const { name, posterImage, backgroundImage, genre, released} = promoFilm;
   const currentGenre = useAppSelector((state) => state.genre);
-  const filmCardCount = filmsData.length;
+  const allFilmCardCount = filmsData.length;
+  const filmsCount = useAppSelector((state) => state.filmsCount);
 
-  let genreFilms = filmsData.filter((item) => item.genre === currentGenre);
+  let genreFilms = filmsData.filter((item) => item.genre.toLowerCase() === currentGenre.toLowerCase());
   if (currentGenre === DEFAULT_GENRE) {
     genreFilms = filmsData;
   }
@@ -71,7 +72,7 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{ filmCardCount }</span>
+                  <span className="film-card__count">{ allFilmCardCount }</span>
                 </button>
               </div>
             </div>
@@ -86,8 +87,8 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
           <GenresList FilmsData={filmsData}/>
 
           <FilmsList
-            genreFilms={genreFilms}
-            isShowButton={genreFilms ? filmCardCount < genreFilms.length : filmCardCount < filmsData.length}
+            genreFilms={genreFilms ? genreFilms.slice(0, filmsCount) : filmsData.slice(0, filmsCount)}
+            isShowButton={genreFilms ? filmsCount < genreFilms.length : filmsCount < filmsData.length}
           />
 
         </section>

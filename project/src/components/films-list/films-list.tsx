@@ -16,20 +16,22 @@ const FilmsList = ({genreFilms, isShowButton}: FilmsListProps): JSX.Element => {
   const handleMouseOut = (): void => setActiveCard(null);
 
   return (
-    <div className="catalog__films-list">
-      {genreFilms.map((film) =>
-        (
-          <SmallFilmCard
-            key={film.id}
-            film={film}
-            activeCard={activeCard}
-            onMouseEnter={handleMouseOn}
-            onMouseLeave={handleMouseOut}
-          />
-        )
-      )}
+    <>
+      <div className="catalog__films-list">
+        {genreFilms.map((film) =>
+          (
+            <SmallFilmCard
+              key={film.id}
+              film={film}
+              activeCard={activeCard}
+              onMouseEnter={handleMouseOn}
+              onMouseLeave={handleMouseOut}
+            />
+          )
+        )}
+      </div>
       {isShowButton && <ShowMore />}
-    </div>
+    </>
   );
 };
 
