@@ -1,5 +1,6 @@
 export const SIMILAR_LIST_COUNT = 4;
 export const DEFAULT_GENRE = 'All genres';
+export const FILMS_COUNT = 8;
 
 export enum AppRoute {
   Main = '/',

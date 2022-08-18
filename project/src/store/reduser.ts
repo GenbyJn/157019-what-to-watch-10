@@ -1,17 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 import films from '../mocks/films';
 import { Film } from '../types/film';
-import { DEFAULT_GENRE } from '../utils/common';
-import { changeGenre, getFilms } from './action';
+import { DEFAULT_GENRE, FILMS_COUNT } from '../utils/common';
+import { changeGenre, getFilms, showMoreFilms } from './action';
 
 type InitialStateTypes = {
-  films: Film [];
+  films: Film []
   genre: string
+  filmsCount: number
 }
 
 const initialState: InitialStateTypes = {
   films: films,
-  genre: DEFAULT_GENRE
+  genre: DEFAULT_GENRE,
+  filmsCount: FILMS_COUNT,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -21,7 +23,13 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
+    })
+    .addCase(showMoreFilms, (state) => {
+      state.filmsCount += FILMS_COUNT;
     });
+  // .addCase(setFilmsCount, (state) => {
+  //   state.filmsCount = FILMS_COUNT;
+  // })
 });
 
 export default reducer;

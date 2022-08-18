@@ -1,16 +1,14 @@
 import SmallFilmCard from '../small-film-card/small-film-card';
 import { Film } from '../../types/film';
 import { useState } from 'react';
-// import { useAppSelector } from '../../hooks';
+import ShowMore from '../show-more/show-more';
 
 type FilmsListProps = {
-  genreFilms: Film[];
+  genreFilms: Film[]
+  isShowButton: boolean
 }
 
-const FilmsList = ({genreFilms}: FilmsListProps): JSX.Element => {
-  // const genre = useAppSelector((state) => state.genre);
-  // // eslint-disable-next-line no-console
-  // console.log(genre);
+const FilmsList = ({genreFilms, isShowButton}: FilmsListProps): JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const handleMouseOn = (id: number) => setActiveCard(id);
@@ -30,6 +28,7 @@ const FilmsList = ({genreFilms}: FilmsListProps): JSX.Element => {
           />
         )
       )}
+      {isShowButton && <ShowMore />}
     </div>
   );
 };

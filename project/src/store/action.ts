@@ -10,4 +10,8 @@ export const getFilms = createAction(
   (films) => ({payload: films.ganre})
 );
 
+export const showMoreFilms = createAction('films/showMore');
+
+export const setFilmsCount = createAction('films/setFilmsCount');
+
 export const clearGenre = createAction('films/clearGenre');

@@ -4,7 +4,6 @@ import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/film';
 import { useAppSelector } from '../../hooks';
 import { DEFAULT_GENRE } from '../../utils/common';
-import ShowMore from '../../components/show-more/show-more';
 import Footer from '../../components/footer/footer';
 
 type MainScreenProps = {
@@ -86,9 +85,11 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
 
           <GenresList FilmsData={filmsData}/>
 
-          <FilmsList genreFilms={genreFilms} />
+          <FilmsList
+            genreFilms={genreFilms}
+            isShowButton={genreFilms ? filmCardCount < genreFilms.length : filmCardCount < filmsData.length}
+          />
 
-          <ShowMore />
         </section>
 
         <Footer/>

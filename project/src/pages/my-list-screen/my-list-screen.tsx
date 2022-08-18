@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import FilmsList from '../../components/films-list/films-list';
+// import FilmsList from '../../components/films-list/films-list';
 import { Film } from '../../types/film';
 
 type MyListProps = {
@@ -33,7 +33,7 @@ const MyListScreen = ({filmsData, favoriteCardCount}: MyListProps):JSX.Element =
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList genreFilms={ favoriteFilms } />
+        {/* <FilmsList genreFilms={ favoriteFilms } isShowButton = {false}/> */}
       </section>
 
       <footer className="page-footer">
