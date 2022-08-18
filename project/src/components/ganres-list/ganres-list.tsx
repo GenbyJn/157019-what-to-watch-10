@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { changeGenre } from '../../store/action';
 import { Film } from '../../types/film';
 import { DEFAULT_GENRE } from '../../utils/common';
@@ -10,11 +10,12 @@ type GenresListProps = {
 }
 
 const GenresList = ({FilmsData}: GenresListProps): JSX.Element => {
-  const genres = useAppSelector(( state ) => state.genre);
+  //const genres = useAppSelector(( state ) => state.genre);
   const dispatch = useAppDispatch();
-  const [activeGenre, setActiveGenre] = useState(genres[0]);
+  const [activeGenre, setActiveGenre] = useState(DEFAULT_GENRE);
   const genresTitle = [DEFAULT_GENRE, ...new Set(FilmsData.map(({ genre }) => genre))];
-
+  // eslint-disable-next-line no-console
+  console.log(activeGenre);
   useEffect(() => {
     dispatch(changeGenre(activeGenre));
   });
