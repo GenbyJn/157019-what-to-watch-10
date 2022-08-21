@@ -1,5 +1,10 @@
 import { Score } from './common';
 
+export function getRunTimeFromMins(value: number) {
+  const hours = Math.trunc(value / 60);
+  const minutes = value % 60;
+  return `${ hours }h ${ minutes }m`;
+}
 
 export const getScoreFilm = (rate: number) => {
 

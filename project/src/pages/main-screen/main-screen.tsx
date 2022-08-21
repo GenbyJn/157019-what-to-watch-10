@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import GenresList from '../../components/ganres-list/ganres-list';
+import GenresList from '../../components/ganres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
 import {Film} from '../../types/film';
 import { useAppSelector } from '../../hooks';
@@ -17,9 +17,10 @@ const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
   const allFilmCardCount = filmsData.length;
   const filmsCount = useAppSelector((state) => state.filmsCount);
 
-  let genreFilms = filmsData.filter((item) => item.genre.toLowerCase() === currentGenre.toLowerCase());
-  if (currentGenre === DEFAULT_GENRE) {
-    genreFilms = filmsData;
+  let genreFilms = filmsData;
+
+  if (currentGenre !== DEFAULT_GENRE) {
+    genreFilms = filmsData.filter((item) => item.genre.toLowerCase() === currentGenre.toLowerCase());
   }
 
   return (

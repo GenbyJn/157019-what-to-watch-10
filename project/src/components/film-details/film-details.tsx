@@ -1,4 +1,5 @@
 import { Film } from '../../types/film';
+import { getRunTimeFromMins } from '../../utils/utils';
 
 type FilmDetailsProps = {
   currentFilm: Film;
@@ -16,7 +17,7 @@ const FilmDetails = ({currentFilm}: FilmDetailsProps):JSX.Element => (
         <strong className="film-card__details-name">Starring</strong>
         <span className="film-card__details-value">
           {
-            currentFilm.starring.map((item) => <span key={item} className="starring-row">{item},</span>)
+            currentFilm.starring.map((item) => <span key={item} className="starring-row">{item},<br /></span>)
           }
         </span>
       </p>
@@ -25,7 +26,7 @@ const FilmDetails = ({currentFilm}: FilmDetailsProps):JSX.Element => (
     <div className="film-card__text-col">
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Run Time</strong>
-        <span className="film-card__details-value">{ currentFilm.runTime }</span>
+        <span className="film-card__details-value">{ getRunTimeFromMins(currentFilm.runTime) }</span>
       </p>
       <p className="film-card__details-item">
         <strong className="film-card__details-name">Genre</strong>

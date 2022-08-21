@@ -11,9 +11,9 @@ type FilmsListProps = {
 const FilmsList = ({genreFilms, isShowButton}: FilmsListProps): JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const handleMouseOn = (id: number) => setActiveCard(id);
+  const handleMouseEnter = (id: number) => setActiveCard(id);
 
-  const handleMouseOut = (): void => setActiveCard(null);
+  const handleMouseLeave = (): void => setActiveCard(null);
 
   return (
     <>
@@ -24,8 +24,8 @@ const FilmsList = ({genreFilms, isShowButton}: FilmsListProps): JSX.Element => {
               key={film.id}
               film={film}
               activeCard={activeCard}
-              onMouseEnter={handleMouseOn}
-              onMouseLeave={handleMouseOut}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             />
           )
         )}

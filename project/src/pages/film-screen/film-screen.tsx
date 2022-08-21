@@ -4,6 +4,7 @@ import Logo from '../../components/logo/logo';
 import { Film } from '../../types/film';
 import TabMenu from '../../components/tab-menu/tab-menu';
 import SimilarFilms from '../../components/similar-films/similar-films';
+import Footer from '../../components/footer/footer';
 
 type FilmScreenProps = {
   filmsData: Film[]
@@ -93,14 +94,7 @@ const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
 
         <SimilarFilms similarFilms={similarFilms} />
 
-        <footer className="page-footer">
-
-          <Logo/>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

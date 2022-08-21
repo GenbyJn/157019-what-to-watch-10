@@ -12,15 +12,16 @@ type GenresListProps = {
 const GenresList = ({FilmsData}: GenresListProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const [activeGenre, setActiveGenre] = useState(DEFAULT_GENRE);
-  const genresTitle = [DEFAULT_GENRE, ...new Set(FilmsData.map(({ genre }) => genre))];
-
+  const genresTitles = [DEFAULT_GENRE, ...new Set(FilmsData.map(({ genre }) => genre))];
+  // eslint-disable-next-line no-console
+  console.log(activeGenre);
   useEffect(() => {
     dispatch(changeGenre(activeGenre));
   });
 
   return (
     <ul className="catalog__genres-list">
-      {( genresTitle ).map(( item ) =>
+      {( genresTitles ).map(( item ) =>
         (
           <li
             key={ item }
