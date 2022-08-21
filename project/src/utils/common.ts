@@ -1,6 +1,9 @@
 export const SIMILAR_LIST_COUNT = 4;
 export const DEFAULT_GENRE = 'All genres';
 export const FILMS_COUNT = 8;
+export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
+export const REQUEST_TIMEOUT = 5000;
+export const AUTH_TOKEN_KEY_NAME = 'wtw-token';
 
 export enum AppRoute {
   Main = '/',
@@ -28,4 +31,12 @@ export enum TabName {
   Overview = 'OVERVIEW',
   Details = 'DETAILS',
   Reviews = 'REVIEWS'
+}
+
+export enum APIRoute {
+  Films = '/films',
+  Promo = '/promo',
+  Login = '/login',
+  Logout = '/logout',
+  Comments = '/comments'
 }
