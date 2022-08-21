@@ -1,26 +1,22 @@
 import Logo from '../../components/logo/logo';
 import GenresList from '../../components/ganres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
-import {Film} from '../../types/film';
 import { useAppSelector } from '../../hooks';
 import { DEFAULT_GENRE } from '../../utils/common';
 import Footer from '../../components/footer/footer';
 
-type MainScreenProps = {
-  promoFilm: Film
-  filmsData: Film[]
-}
 
-const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
-  const { name, posterImage, backgroundImage, genre, released} = promoFilm;
+const MainScreen = (): JSX.Element => {
+  const allFilms = useAppSelector((state) => state.films)
   const currentGenre = useAppSelector((state) => state.genre);
-  const allFilmCardCount = filmsData.length;
+  const allFilmCardCount = allFilms.length;
   const filmsCount = useAppSelector((state) => state.filmsCount);
-
-  let genreFilms = filmsData;
+  // eslint-disable-next-line no-console
+  console.log(allFilms);
+  let genreFilms = allFilms;
 
   if (currentGenre !== DEFAULT_GENRE) {
-    genreFilms = filmsData.filter((item) => item.genre.toLowerCase() === currentGenre.toLowerCase());
+    genreFilms = allFilms.filter((item) => item.genre.toLowerCase() === currentGenre.toLowerCase());
   }
 
   return (

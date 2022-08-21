@@ -1,10 +1,11 @@
-import { loadFilms, requireAuthorisation } from './../store/action';
+import { store } from './../store/index';
+import { loadFilms, requireAuthorisation, setError } from './../store/action';
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
 import { saveToken, dropToken } from './token';
-import { APIRoute, AuthorizationStatus } from '../utils/common';
+import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../utils/common';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 
@@ -61,3 +62,14 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorisation(AuthorizationStatus.NoAuth));
   },
 );
+
+export const clearErrorction = createAsyncThunk(
+  'user/clearError',
+  () => {
+    setTimeout(
+      () => store.dispatch(setError(null)),
+      TIMEOUT_SHOW_ERROR,
+    );
+  }
+);
+

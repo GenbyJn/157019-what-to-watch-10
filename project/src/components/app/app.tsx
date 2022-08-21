@@ -8,21 +8,16 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Film } from '../../types/film';
 
-type AppScreenProps = {
-  filmsData: Film[]
-  promoFilm: Film
-}
 
-const App = ({filmsData, promoFilm }:AppScreenProps): JSX.Element => (
+const App = (): JSX.Element => (
   <BrowserRouter>
     <Routes>
 
       <Route
         path={AppRoute.Main}
         element={
-          <MainScreen filmsData={filmsData} promoFilm={promoFilm} />
+          <MainScreen />
         }
       />
 
@@ -36,24 +31,24 @@ const App = ({filmsData, promoFilm }:AppScreenProps): JSX.Element => (
 
         element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-            <MyListScreen favoriteCardCount={'9'} filmsData={filmsData} />
+            <MyListScreen favoriteCardCount={'9'} />
           </PrivateRoute>
         }
       />
 
       <Route
         path={AppRoute.Film}
-        element={<FilmScreen filmsData={filmsData}/>}
+        element={<FilmScreen />}
       />
 
       <Route
         path={AppRoute.AddReview}
-        element={<AddReviewScreen filmsData={filmsData}/>}
+        element={<AddReviewScreen />}
       />
 
       <Route
         path={AppRoute.Player}
-        element={<PlayerScreen filmsData={filmsData}/>}
+        element={<PlayerScreen />}
       />
 
       <Route
