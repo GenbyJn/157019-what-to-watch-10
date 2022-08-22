@@ -1,13 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
 import AddReview from '../../components/add-review/add-review';
 import Logo from '../../components/logo/logo';
+import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/film';
 
-type AddReviewScreenProps = {
-  filmsData: Film[]
-}
-
-const AddReviewScreen = ({filmsData}: AddReviewScreenProps):JSX.Element => {
+const AddReviewScreen = ():JSX.Element => {
+  const filmsData = useAppSelector((state) => state.films);
   const params = useParams();
   const id = Number(params.id);
   const currentFilm = filmsData.find((item) => item.id === id) as Film;

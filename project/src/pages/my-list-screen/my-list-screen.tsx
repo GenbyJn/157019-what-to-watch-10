@@ -1,13 +1,13 @@
 import Logo from '../../components/logo/logo';
+import { useAppSelector } from '../../hooks';
 // import FilmsList from '../../components/films-list/films-list';
-import { Film } from '../../types/film';
 
 type MyListProps = {
   favoriteCardCount: string
-  filmsData: Film[]
 }
 
-const MyListScreen = ({filmsData, favoriteCardCount}: MyListProps):JSX.Element => {
+const MyListScreen = ({favoriteCardCount}: MyListProps):JSX.Element => {
+  const filmsData = useAppSelector((state) => state.films);
   const favoriteFilms = filmsData.filter((item) => item.isFavorite);
   favoriteCardCount = favoriteFilms.length.toString();
 

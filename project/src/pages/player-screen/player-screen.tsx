@@ -1,12 +1,9 @@
 import { useParams } from 'react-router-dom';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 import ErrorScreen from '../error-screen/error-screen';
 
-type PlayerScreenProps = {
-  filmsData: Film[];
-}
-
-const PlayerScreen = ({filmsData}: PlayerScreenProps): JSX.Element => {
+const PlayerScreen = (): JSX.Element => {
+  const filmsData = useAppSelector((state) => state.films);
   const params = useParams();
   const id = Number(params.id);
   const film = filmsData.find((item) => item.id === id);

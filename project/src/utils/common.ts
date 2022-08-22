@@ -41,3 +41,9 @@ export enum APIRoute {
   Logout = '/logout',
   Comments = '/comments'
 }
+
+export enum SliceName {
+  Auth = 'AUTH',
+  Promo = 'PROMO',
+  Films = 'FILMS',
+}

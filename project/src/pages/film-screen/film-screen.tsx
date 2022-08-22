@@ -5,12 +5,11 @@ import { Film } from '../../types/film';
 import TabMenu from '../../components/tab-menu/tab-menu';
 import SimilarFilms from '../../components/similar-films/similar-films';
 import Footer from '../../components/footer/footer';
+import { useAppSelector } from '../../hooks';
 
-type FilmScreenProps = {
-  filmsData: Film[]
-}
 
-const FilmScreen = ({ filmsData }: FilmScreenProps):JSX.Element => {
+const FilmScreen = ():JSX.Element => {
+  const filmsData = useAppSelector((state) => state.films);
   const navigate = useNavigate();
   const params = useParams();
   const id = Number(params.id);

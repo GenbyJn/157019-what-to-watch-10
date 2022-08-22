@@ -1,10 +1,10 @@
-import { store } from './../store/index';
-import { loadFilms, requireAuthorisation, setError } from './../store/action';
+import { store } from './index';
+import { loadFilms, requireAuthorisation, setError } from './action';
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
-import { saveToken, dropToken } from './token';
+import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../utils/common';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -18,6 +18,17 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Film[]>(APIRoute.Films);
     dispatch(loadFilms(data));
+  },
+);
+
+export const fetchPromoFilmAction = createAsyncThunk<Film, undefined, {
+  state: State,
+  extra: AxiosInstance
+}>(
+  'promo/fetchPromoFilm',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<Film>(APIRoute.Promo);
+    return data;
   },
 );
 
