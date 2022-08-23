@@ -4,7 +4,7 @@ import Logo from '../logo/logo';
 
 const FilmPromo = ():JSX.Element => {
   const filmPromo = useAppSelector(selectPromoFilm);
-  const {backgroundImage, name, posterImage, genre, released, allFilmCardCount} = filmPromo;
+  const {backgroundImage, name, posterImage, genre, released } = filmPromo;
 
   return (
     <section className="film-card">
@@ -55,7 +55,7 @@ const FilmPromo = ():JSX.Element => {
                   <use xlinkHref="#add"></use>
                 </svg>
                 <span>My list</span>
-                <span className="film-card__count">{ allFilmCardCount }</span>
+                <span className="film-card__count"> allFilmCardCount </span>
               </button>
             </div>
           </div>

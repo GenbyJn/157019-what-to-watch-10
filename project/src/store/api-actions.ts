@@ -1,5 +1,5 @@
 import { store } from './index';
-import { loadFilms, requireAuthorisation, setError } from './action';
+import { requireAuthorisation, setError } from './action';
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
@@ -9,15 +9,15 @@ import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../utils/comm
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 
-export const fetchFilmsAction = createAsyncThunk<void, undefined, {
+export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/fetchFilms',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Film[]>(APIRoute.Films);
-    dispatch(loadFilms(data));
+    return data;
   },
 );
 
@@ -31,6 +31,17 @@ export const fetchPromoFilmAction = createAsyncThunk<Film, undefined, {
     return data;
   },
 );
+
+// export const fetchFilmAction = createAsyncThunk<Film, string, {
+//   state: State,
+//   extra: AxiosInstance
+// }>(
+//   'films/fetchFilm',
+//   async (id, { extra: api }) => {
+//     const { data } = await api.get<Film>(`${APIRoute.Films}/${id}`);
+//     return data;
+//   },
+// );
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,

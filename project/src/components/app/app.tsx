@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../utils/common';
 import MainScreen from '../../pages/main-screen/main-screen';
 import ErrorScreen from '../../pages/error-screen/error-screen';
@@ -8,10 +8,12 @@ import FilmScreen from '../../pages/film-screen/film-screen';
 import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 
 const App = (): JSX.Element => (
-  <BrowserRouter>
+  <HistoryRouter history={ browserHistory }>
     <Routes>
 
       <Route
@@ -56,8 +58,8 @@ const App = (): JSX.Element => (
         element={<ErrorScreen />}
       />
 
-    </Routes>
-  </BrowserRouter>
+    </ Routes>
+  </ HistoryRouter>
 );
 
 export default App;

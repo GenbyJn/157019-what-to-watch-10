@@ -1,6 +1,8 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import { BACKEND_URL, REQUEST_TIMEOUT } from '../utils/common';
 import { getToken } from './token';
+// import { StatusCodes } from 'http-status-codes';
+// import { toast } from 'react-toastify';
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({

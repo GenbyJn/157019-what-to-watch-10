@@ -1,3 +1,4 @@
+import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 
 const LoginScreen = ():JSX.Element => (
@@ -27,14 +28,7 @@ const LoginScreen = ():JSX.Element => (
       </form>
     </div>
 
-    <footer className="page-footer">
-
-      <Logo/>
-
-      <div className="copyright">
-        <p>© 2019 What to watch Ltd.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 
