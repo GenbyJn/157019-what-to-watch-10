@@ -10,3 +10,9 @@ export type Comment = {
   rating: number;
   user: UserReview;
 }
+
+export type NewComment = {
+  filmId: number,
+  comment: string;
+  rating: number;
+}

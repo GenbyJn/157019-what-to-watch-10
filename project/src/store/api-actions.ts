@@ -6,7 +6,7 @@ import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute, TabName } from '../utils/common';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { Comment } from '../types/comment';
+import { Comment, NewComment } from '../types/comment';
 import { redirectToRoute } from './actions';
 
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
@@ -73,7 +73,7 @@ export const fetchCommentsAction = createAsyncThunk<Comment[], string, {
   }
 );
 
-export const sendCommentAction = createAsyncThunk<Comment[], NewCommentType, {
+export const sendCommentAction = createAsyncThunk<Comment[], NewComment, {
   dispatch: AppDispatch,
   extra: AxiosInstance,
 }>(
