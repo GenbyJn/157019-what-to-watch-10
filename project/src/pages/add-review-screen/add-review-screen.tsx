@@ -1,20 +1,42 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import AddReview from '../../components/add-review/add-review';
+import Loading from '../../components/loading/loading';
 import Logo from '../../components/logo/logo';
+import ServerError from '../../components/server-error/server-error';
 import { useAppSelector } from '../../hooks';
-import { Film } from '../../types/film';
+import { fetchFilmAction } from '../../store/api-actions';
+import { selectFilm, selectIsLoadedError, selectIsLoadedFilm } from '../../store/film-slice/selectors';
 
 const AddReviewScreen = ():JSX.Element => {
-  const filmsData = useAppSelector((state) => state.films);
   const params = useParams();
-  const id = Number(params.id);
-  const currentFilm = filmsData.find((item) => item.id === id) as Film;
+  const dispatch = useDispatch();
+  const film = useAppSelector(selectFilm);
+  const isLoading = useAppSelector(selectIsLoadedFilm);
+  const isErrorLoadFilm = useAppSelector(selectIsLoadedError);
+  const filmId = params.id;
+
+  useEffect(() => {
+    if (filmId) {
+      dispatch(fetchFilmAction(filmId));
+    }
+  }, [dispatch, filmId]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isErrorLoadFilm) {
+    return <ServerError/>;
+  }
+  const {id, name, posterImage, backgroundImage} = film;
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={ backgroundImage } alt={ name } />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -26,7 +48,7 @@ const AddReviewScreen = ():JSX.Element => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${currentFilm.id}`} className="breadcrumbs__link">{currentFilm.name}</Link>
+                <Link to={`/films/${ id }`} className="breadcrumbs__link">{ name }</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a href="/#" className="breadcrumbs__link">Add review</a>
@@ -47,7 +69,7 @@ const AddReviewScreen = ():JSX.Element => {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={currentFilm.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={ posterImage } alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
 

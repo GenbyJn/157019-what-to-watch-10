@@ -1,23 +1,20 @@
 import GenresList from '../../components/ganres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
-import { DEFAULT_GENRE } from '../../utils/common';
+import { FILMS_COUNT } from '../../utils/common';
 import Footer from '../../components/footer/footer';
 import FilmPromo from '../../components/film-promo/film-promo';
+import { useState } from 'react';
+import { selectFilterFilms } from '../../store/films-slice/selectors';
+import { Film } from '../../types/film';
+import ShowMore from '../../components/show-more/show-more';
 
 
 const MainScreen = (): JSX.Element => {
-  const filmsData = useAppSelector((state) => state.films);
-  const currentGenre = useAppSelector((state) => state.genre);
-  const allFilmCardCount = filmsData.length;
-  const filmsCount = useAppSelector((state) => state.filmsCount);
-  // eslint-disable-next-line no-console
-  console.log(filmsData);
-  let genreFilms = filmsData;
+  const [showCount, setShowCount] = useState<number>(FILMS_COUNT);
+  const sortFilms = useAppSelector(selectFilterFilms);
 
-  if (currentGenre !== DEFAULT_GENRE) {
-    genreFilms = filmsData.filter((item) => item.genre.toLowerCase() === currentGenre.toLowerCase());
-  }
+  const getFilmsList = (films: Film[]) => films.slice(0, showCount);
 
   return (
     <>
@@ -27,12 +24,17 @@ const MainScreen = (): JSX.Element => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList FilmsData={filmsData}/>
+          <GenresList onChangeShowCount={setShowCount}/>
 
-          <FilmsList
-            genreFilms={genreFilms ? genreFilms.slice(0, filmsCount) : filmsData.slice(0, filmsCount)}
-            isShowButton={genreFilms ? allFilmCardCount < genreFilms.length : filmsCount < filmsData.length}
-          />
+          <FilmsList films={getFilmsList(sortFilms)} />
+
+          {
+            sortFilms.length > showCount &&
+            <ShowMore
+              showCount={showCount}
+              onChangeShowCount={setShowCount}
+            />
+          }
 
         </section>
 

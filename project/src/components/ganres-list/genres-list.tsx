@@ -1,22 +1,24 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks';
-import { changeGenre } from '../../store/action';
-import { Film } from '../../types/film';
-import { DEFAULT_GENRE } from '../../utils/common';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeGenre } from '../../store/films-slice/films-slice';
+import { selectGenres } from '../../store/films-slice/selectors';
+
+import { DEFAULT_GENRE, FILMS_COUNT } from '../../utils/common';
 
 type GenresListProps = {
-  FilmsData: Film[]
+  onChangeShowCount: (value: number) => void;
 }
 
-const GenresList = ({FilmsData}: GenresListProps): JSX.Element => {
+const GenresList = ({onChangeShowCount}: GenresListProps): JSX.Element => {
+  const genres = useAppSelector(selectGenres);
   const dispatch = useAppDispatch();
   const [activeGenre, setActiveGenre] = useState(DEFAULT_GENRE);
-  const genresTitles = [DEFAULT_GENRE, ...new Set(FilmsData.map(({ genre }) => genre))];
-  // eslint-disable-next-line no-console
-  console.log(activeGenre);
+  const genresTitles = [DEFAULT_GENRE, ...new Set(genres.map(( genre ) => genre))];
+
   useEffect(() => {
     dispatch(changeGenre(activeGenre));
+    onChangeShowCount(FILMS_COUNT);
   });
 
   return (

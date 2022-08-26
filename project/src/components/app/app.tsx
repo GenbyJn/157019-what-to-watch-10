@@ -10,56 +10,77 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import { useAppSelector } from '../../hooks';
+import Loading from '../loading/loading';
+import ServerError from '../server-error/server-error';
+import { selectIsLoadedError, selectIsLoadedFilms } from '../../store/films-slice/selectors';
+import { selectAuthStatus } from '../../store/auth-slice/selectors';
+import { selectIsPromoError } from '../../store/promo-slice/selectors';
 
 
-const App = (): JSX.Element => (
-  <HistoryRouter history={ browserHistory }>
-    <Routes>
+const App = (): JSX.Element => {
+  const isFilmsLoaded = useAppSelector(selectIsLoadedFilms);
+  const isErrorLoadFilms = useAppSelector(selectIsLoadedError);
+  const isPromoLoaded = useAppSelector(selectIsLoadedError);
+  const isErrorLoadPromo = useAppSelector(selectIsPromoError);
+  const authStatus = useAppSelector(selectAuthStatus);
 
-      <Route
-        path={AppRoute.Main}
-        element={
-          <MainScreen />
-        }
-      />
+  if (authStatus === AuthorizationStatus.Unknown || isFilmsLoaded || isPromoLoaded) {
+    return <Loading />;
+  }
 
-      <Route
-        path={AppRoute.SignIn}
-        element={<LoginScreen/>}
-      />
+  if (isErrorLoadFilms || isErrorLoadPromo) {
+    return <ServerError/>;
+  }
 
-      <Route
-        path={AppRoute.MyList}
+  return (
+    <HistoryRouter history={ browserHistory }>
+      <Routes>
 
-        element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-            <MyListScreen favoriteCardCount={'9'} />
-          </PrivateRoute>
-        }
-      />
+        <Route
+          path={AppRoute.Main}
+          element={
+            <MainScreen />
+          }
+        />
 
-      <Route
-        path={AppRoute.Film}
-        element={<FilmScreen />}
-      />
+        <Route
+          path={AppRoute.SignIn}
+          element={<LoginScreen/>}
+        />
 
-      <Route
-        path={AppRoute.AddReview}
-        element={<AddReviewScreen />}
-      />
+        <Route
+          path={AppRoute.MyList}
 
-      <Route
-        path={AppRoute.Player}
-        element={<PlayerScreen />}
-      />
+          element={
+            <PrivateRoute >
+              <MyListScreen />
+            </PrivateRoute>
+          }
+        />
 
-      <Route
-        path="*"
-        element={<ErrorScreen />}
-      />
+        <Route
+          path={AppRoute.Film}
+          element={<FilmScreen />}
+        />
 
-    </ Routes>
-  </ HistoryRouter>
-);
+        <Route
+          path={AppRoute.AddReview}
+          element={<AddReviewScreen />}
+        />
 
+        <Route
+          path={AppRoute.Player}
+          element={<PlayerScreen />}
+        />
+
+        <Route
+          path="*"
+          element={<ErrorScreen />}
+        />
+
+      </ Routes>
+    </ HistoryRouter>
+  );
+};
 export default App;

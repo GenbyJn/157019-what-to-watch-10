@@ -1,14 +1,19 @@
-import { useAppDispatch } from '../../hooks';
-import { showMoreFilms } from '../../store/action';
+import { FILMS_COUNT } from '../../utils/common';
 
-const ShowMore = (): JSX.Element => {
-  const dispatch = useAppDispatch();
+type ShowMoreProps = {
+  showCount: number;
+  onChangeShowCount: (count: number) => void;
+}
+
+
+const ShowMore = (props: ShowMoreProps): JSX.Element => {
+  const { showCount, onChangeShowCount } = props;
 
   return (
     <div className="catalog__more">
       <button className="catalog__button"
         type="button"
-        onClick={() => dispatch(showMoreFilms())}
+        onClick={() => onChangeShowCount(showCount + FILMS_COUNT)}
       >
         Show more
       </button>

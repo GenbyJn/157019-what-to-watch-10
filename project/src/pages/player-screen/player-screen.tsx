@@ -1,51 +1,116 @@
-import { useParams } from 'react-router-dom';
+import {useEffect, useRef, useState} from 'react';
+import {Link, Navigate, useParams} from 'react-router-dom';
+import {getFilmUrl} from '../../utils/route';
+import {Video, VideoControl, VideoProgress} from '../../components';
+import {APIRoute, formattingLastTime} from '../../utils/common';
+import {selectPlayFilm, selectPlayType} from '../../store/player-slice/selectors';
+import {PlayType} from '../../utils/common';
+import './player.css';
+
 import { useAppSelector } from '../../hooks';
-import ErrorScreen from '../error-screen/error-screen';
+
+enum ProgressPlay {
+  Start = 0,
+  End = 100,
+}
 
 const PlayerScreen = (): JSX.Element => {
-  const filmsData = useAppSelector((state) => state.films);
   const params = useParams();
-  const id = Number(params.id);
-  const film = filmsData.find((item) => item.id === id);
+  const film = useAppSelector(selectPlayFilm);
+  const playType = useAppSelector(selectPlayType);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(ProgressPlay.Start);
+  const [lastTime, setLastTime] = useState<number>(ProgressPlay.Start);
+  const formatLastTime = formattingLastTime(lastTime);
 
-  if (film) {
-    const {name, posterImage, videoLink} = film;
+  useEffect(() => {
+    isPlaying
+      ? videoRef.current?.play()
+      : videoRef.current?.pause();
+  }, [isPlaying]);
 
-    return (
-      <div className="player">
-        <video src={ videoLink } className="player__video" poster={ posterImage }></video>
-
-        <button type="button" className="player__exit">Exit</button>
-
-        <div className="player__controls">
-          <div className="player__controls-row">
-            <div className="player__time">
-              <progress className="player__progress" value="30" max="100"></progress>
-              <div className="player__toggler" style={{left: '30%;'}}>Toggler</div>
-            </div>
-            <div className="player__time-value">1:30:29</div>
-          </div>
-
-          <div className="player__controls-row">
-            <button type="button" className="player__play">
-              <svg viewBox="0 0 19 19" width="19" height="19">
-                <use xlinkHref="#play-s"></use>
-              </svg>
-              <span>Play</span>
-            </button>
-            <div className="player__name">{ name }</div>
-
-            <button type="button" className="player__full-screen">
-              <svg viewBox="0 0 27 27" width="27" height="27">
-                <use xlinkHref="#full-screen"></use>
-              </svg>
-              <span>Full screen</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+  if (!film || playType === PlayType.Unknown) {
+    const filmId = params.id as string;
+    return <Navigate to={getFilmUrl(filmId)}/>;
   }
-  return <ErrorScreen/>;
-};
+
+  const { id, name, previewImage, videoLink } = film;
+
+  const handleInitVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = ProgressPlay.Start;
+      handleTogglePlay();
+    }
+  };
+
+  const handleToggleFullscreen = () => {
+    videoRef.current?.requestFullscreen();
+  };
+
+  const handleTogglePlay = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      const currentProgress = (videoRef.current?.currentTime / videoRef.current?.duration) * ProgressPlay.End;
+      setProgress(currentProgress);
+      setLastTime(videoRef.current.duration - videoRef.current.currentTime);
+    }
+  };
+
+  const handleVideoProgress = (value: string) => {
+    const manualChange = Number(value);
+    if (videoRef.current) {
+      videoRef.current.currentTime = (videoRef.current?.duration / ProgressPlay.End) * manualChange;
+      setProgress(manualChange);
+    }
+  };
+
+  const handleEndPlay = () => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = ProgressPlay.Start;
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div className="player">
+      <Video
+        videoRef={videoRef}
+        src={videoLink}
+        poster={previewImage}
+        onLoadedMetadata={handleInitVideo}
+        onTimeUpdate={handleTimeUpdate}
+        onEndPlay={handleEndPlay}
+      />
+
+      <Link
+        onClick={() => setIsPlaying(false)}
+        to={playType === PlayType.Promo ? APIRoute.Main : getFilmUrl(id)}
+        className="player__exit"
+        data-testid="player-exit"
+      >
+        Exit
+      </Link>
+
+      <div className="player__controls">
+        <VideoProgress
+          progress={progress}
+          lastTile={formatLastTime}
+          onVideoProgress={handleVideoProgress}
+        />
+
+        <VideoControl
+          title={name}
+          isPlaying={isPlaying}
+          onTogglePlay={handleTogglePlay}
+          onToggleFullscreen={handleToggleFullscreen}
+        />
+      </div>
+    </div>
+  );
+}
+
 export default PlayerScreen;

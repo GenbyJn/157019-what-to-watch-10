@@ -1,14 +1,12 @@
 import SmallFilmCard from '../small-film-card/small-film-card';
 import { Film } from '../../types/film';
 import { useState } from 'react';
-import ShowMore from '../show-more/show-more';
 
 type FilmsListProps = {
-  genreFilms: Film[]
-  isShowButton: boolean
+  films: Film[]
 }
 
-const FilmsList = ({genreFilms, isShowButton}: FilmsListProps): JSX.Element => {
+const FilmsList = ({films}: FilmsListProps): JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const handleMouseEnter = (id: number) => setActiveCard(id);
@@ -16,22 +14,19 @@ const FilmsList = ({genreFilms, isShowButton}: FilmsListProps): JSX.Element => {
   const handleMouseLeave = (): void => setActiveCard(null);
 
   return (
-    <>
-      <div className="catalog__films-list">
-        {genreFilms.map((film) =>
-          (
-            <SmallFilmCard
-              key={film.id}
-              film={film}
-              activeCard={activeCard}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            />
-          )
-        )}
-      </div>
-      {isShowButton && <ShowMore />}
-    </>
+    <div className="catalog__films-list">
+      {films.map((film) =>
+        (
+          <SmallFilmCard
+            key={film.id}
+            film={film}
+            activeCard={activeCard}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
+        )
+      )}
+    </div>
   );
 };
 
