@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SliceName } from '../../utils/common';
+import { NameSpace } from '../../utils/common';
 import { Film } from '../../types/film';
 import { fetchPromoFilmAction } from '../api-actions';
 
@@ -14,7 +14,7 @@ const initialState: PromoSliceTypes = {
 };
 
 export const promoSlice = createSlice({
-  name: SliceName.Promo,
+  name: NameSpace.Promo,
   initialState,
   reducers: {},
   extraReducers(builder) {

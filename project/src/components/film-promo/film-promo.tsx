@@ -1,15 +1,14 @@
 import { useAppSelector } from '../../hooks';
-import { selectPromoFilm } from '../../store/promo-slice/select';
+import { selectPromoFilm } from '../../store/promo-slice/selectors';
 import Logo from '../logo/logo';
 
 const FilmPromo = ():JSX.Element => {
   const filmPromo = useAppSelector(selectPromoFilm);
-  const {backgroundImage, name, posterImage, genre, released } = filmPromo;
 
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={ backgroundImage } alt={ name } />
+        <img src={ filmPromo?.backgroundImage } alt={ filmPromo?.name } />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -33,14 +32,14 @@ const FilmPromo = ():JSX.Element => {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src={ posterImage } alt={ name } width="218" height="327" />
+            <img src={ filmPromo?.posterImage } alt={ filmPromo?.name } width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">{ name }</h2>
+            <h2 className="film-card__title">{ filmPromo?.name }</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{ genre } </span>
-              <span className="film-card__year">{ released }</span>
+              <span className="film-card__genre">{ filmPromo?.genre } </span>
+              <span className="film-card__year">{ filmPromo?.released }</span>
             </p>
 
             <div className="film-card__buttons">

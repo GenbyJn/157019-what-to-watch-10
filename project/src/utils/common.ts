@@ -39,11 +39,16 @@ export enum APIRoute {
   Promo = '/promo',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
+  Favorite = '/favorite',
 }
 
-export enum SliceName {
+export enum NameSpace {
   Auth = 'AUTH',
   Promo = 'PROMO',
   Films = 'FILMS',
+  Film = 'FILM',
+  Favorite = 'FAVORITE',
+  Comments = 'COMMENTS',
+  Player = 'PLAYER',
 }
