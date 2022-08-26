@@ -11,7 +11,7 @@ type VideoProps = {
   onEndPlay?: () => void,
 }
 
-function Video(props: VideoProps): JSX.Element {
+const Video = (props: VideoProps): JSX.Element => {
   const {videoRef, src, poster, onLoadedMetadata, onTimeUpdate, onEndPlay} = props;
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -37,6 +37,6 @@ function Video(props: VideoProps): JSX.Element {
       }
     </>
   );
-}
+};
 
 export default Video;

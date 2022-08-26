@@ -5,7 +5,7 @@ type VideoControlProps = {
   onToggleFullscreen: () => void,
 }
 
-function VideoControl(props: VideoControlProps): JSX.Element {
+const VideoControl = (props: VideoControlProps): JSX.Element => {
   const { title, isPlaying, onTogglePlay, onToggleFullscreen } = props;
 
   return (
@@ -54,6 +54,6 @@ function VideoControl(props: VideoControlProps): JSX.Element {
       </button>
     </div>
   );
-}
+};
 
 export default VideoControl;

@@ -1,12 +1,14 @@
 import {useEffect, useRef, useState} from 'react';
 import {Link, Navigate, useParams} from 'react-router-dom';
-import {Video, VideoControl, VideoProgress} from '../../components';
 import {APIRoute,} from '../../utils/common';
 import {selectPlayFilm, selectPlayType} from '../../store/player-slice/selectors';
 import {PlayType} from '../../utils/common';
 import { useAppSelector } from '../../hooks';
 import { getFilmUrl } from '../../utils/urls';
 import { formattingLastTime } from '../../utils/date';
+import VideoProgress from '../../components/video-progress/video-progress';
+import VideoControl from '../../components/video-control/video-control';
+import Video from '../../components/video/video';
 
 enum ProgressPlay {
   Start = 0,

@@ -4,7 +4,7 @@ type VideoProgressProps = {
   onVideoProgress: (value: string) => void;
 }
 
-function VideoProgress(props: VideoProgressProps): JSX.Element {
+const VideoProgress = (props: VideoProgressProps): JSX.Element => {
   const { progress, lastTile, onVideoProgress } = props;
 
   return (
@@ -29,6 +29,6 @@ function VideoProgress(props: VideoProgressProps): JSX.Element {
       <div className="player__time-value" data-testid="player-time">- { lastTile }</div>
     </div>
   );
-}
+};
 
 export default VideoProgress;
