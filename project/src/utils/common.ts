@@ -34,6 +34,29 @@ export enum TabName {
   Reviews = 'REVIEWS'
 }
 
+export const RouteName = {
+  Main: '/',
+  Genre: {
+    path: '/genre/:genreName',
+    name: 'genre'
+  },
+  SignIn: '/login',
+  MyList: '/mylist',
+  Film: {
+    path: '/films/:id',
+    name: 'films'
+  },
+  Player: {
+    path: '/player/:id',
+    name: 'player'
+  },
+  AddReview: {
+    path: '/films/:id/review',
+    name: 'films'
+  },
+  NotFound: '*',
+};
+
 export enum APIRoute {
   Main = '/',
   Films = '/films',
@@ -59,3 +82,5 @@ export enum PlayType {
   Promo = 'PROMO',
   Unknown = 'UNKNOWN',
 }
+
+

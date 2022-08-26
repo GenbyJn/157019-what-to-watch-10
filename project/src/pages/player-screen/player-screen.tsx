@@ -1,13 +1,12 @@
 import {useEffect, useRef, useState} from 'react';
 import {Link, Navigate, useParams} from 'react-router-dom';
-import {getFilmUrl} from '../../utils/route';
 import {Video, VideoControl, VideoProgress} from '../../components';
-import {APIRoute, formattingLastTime} from '../../utils/common';
+import {APIRoute,} from '../../utils/common';
 import {selectPlayFilm, selectPlayType} from '../../store/player-slice/selectors';
 import {PlayType} from '../../utils/common';
-import './player.css';
-
 import { useAppSelector } from '../../hooks';
+import { getFilmUrl } from '../../utils/urls';
+import { formattingLastTime } from '../../utils/date';
 
 enum ProgressPlay {
   Start = 0,
@@ -111,6 +110,6 @@ const PlayerScreen = (): JSX.Element => {
       </div>
     </div>
   );
-}
+};
 
 export default PlayerScreen;
