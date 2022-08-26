@@ -1,17 +1,14 @@
 import { useState } from 'react';
-import { Film } from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import { selectSimilarFilms } from '../../store/film-slice/selectors';
 import { SIMILAR_LIST_COUNT } from '../../utils/common';
 import SmallFilmCard from '../small-film-card/small-film-card';
 
-type SimilarFilmsProps = {
-  similarFilms: Film[];
-}
-
-const SimilarFilms = ({similarFilms}: SimilarFilmsProps):JSX.Element => {
+const SimilarFilms = ():JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
   const handleMouseEnter = (id: number) => setActiveCard(id);
   const handleMouseLeave = (): void => setActiveCard(null);
-
+  const similarFilms = useAppSelector(selectSimilarFilms).slice(0, SIMILAR_LIST_COUNT);
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
