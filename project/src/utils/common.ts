@@ -35,6 +35,7 @@ export enum TabName {
 }
 
 export enum APIRoute {
+  Main = '/',
   Films = '/films',
   Promo = '/promo',
   Login = '/login',
@@ -51,4 +52,10 @@ export enum NameSpace {
   Favorite = 'FAVORITE',
   Comments = 'COMMENTS',
   Player = 'PLAYER',
+}
+
+export enum PlayType {
+  Film = 'FILM',
+  Promo = 'PROMO',
+  Unknown = 'UNKNOWN',
 }

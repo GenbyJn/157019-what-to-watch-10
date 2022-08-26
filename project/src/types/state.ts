@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from './../utils/common';
+import { AuthorizationStatus, PlayType } from './../utils/common';
 import { store } from '../store/index';
 import { Film } from './film';
 
@@ -45,3 +45,6 @@ export type FavoriteSliceState = {
   isLoadError: boolean;
 }
 
+export type PlayerSliceState = {
+  playType: PlayType,
+}

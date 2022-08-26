@@ -1,11 +1,9 @@
-import { store } from './index';
-
 import { AxiosError, AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AuthorizationStatus, TabName, TIMEOUT_SHOW_ERROR } from '../utils/common';
+import { APIRoute, AppRoute, TabName } from '../utils/common';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { Comment } from '../types/comment';
@@ -89,5 +87,53 @@ export const sendCommentAction = createAsyncThunk<Comment[], NewCommentType, {
       const error = err as AxiosError<{ error: string }>;
       return rejectWithValue(error);
     }
+  }
+);
+
+export const checkAuthAction = createAsyncThunk<string, undefined, {
+  extra: AxiosInstance
+}>(
+  'auth/checkAuth',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<UserData>(APIRoute.Login);
+    return data.avatarUrl;
+  }
+);
+
+export const loginAction = createAsyncThunk<string, AuthData, {
+  dispatch: AppDispatch,
+  extra: AxiosInstance,
+}>(
+  'auth/login',
+  async ({login: email, password}, {dispatch, extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Main));
+      return data.avatarUrl;
+    } catch (err) {
+      const error = err as AxiosError<{ error: string }>;
+      return rejectWithValue(error.response?.data.error);
+    }
+  }
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  extra: AxiosInstance
+}>(
+  'auth/logout',
+  async (_arg, {extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+  }
+);
+
+export const fetchFavoritesAction = createAsyncThunk<Film[], undefined, {
+  extra: AxiosInstance,
+}>(
+  'favorite/fetchFavorites',
+  async (_args, {extra: api}) => {
+    const {data} = await api.get<Film[]>(APIRoute.Favorite);
+    return data;
   }
 );
