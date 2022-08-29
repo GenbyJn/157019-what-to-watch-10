@@ -3,7 +3,7 @@ import FilmsList from '../../components/films-list/films-list';
 import {selectFavorites, selectIsLoadedError, selectIsLoadedFavorites} from '../../store/favorite-slice/selectors';
 import {fetchFavoritesAction} from '../../store/api-actions';
 import ServerError from '../../components/server-error/server-error';
-import Loading from '../../components/loading/loading';
+import Loader from '../../components/loader/loader';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Footer from '../../components/footer/footer';
 
@@ -19,7 +19,7 @@ function FavoriteFilms(): JSX.Element {
   }, [dispatch]);
 
   if (isLoading) {
-    return <Loading/>;
+    return <Loader />;
   }
 
   if (isErrorLoadFavorite) {

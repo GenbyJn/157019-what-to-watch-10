@@ -1,10 +1,11 @@
 import {FormEvent, useState} from 'react';
-import RatingSelect from '../comment-form/rating/rating';
+import RatingSelect from './rating/rating';
+import {useAppDispatch} from '../../hooks/index';
 import {sendCommentAction} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/index';
 import {selectCommentError, selectIsSendingComment} from '../../store/comments-slice/selectors';
 import {useValidComment} from '../../hooks/use-valid-comment';
 import {DEFAULT_RATING} from '../../utils/common';
-import { useAppDispatch, useAppSelector } from '../../hooks';
 
 type CommentFormType = {
   filmId: number;

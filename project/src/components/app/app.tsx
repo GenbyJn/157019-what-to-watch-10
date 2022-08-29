@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../utils/common';
+import { AuthorizationStatus, RouteName } from '../../utils/common';
 import MainScreen from '../../pages/main-screen/main-screen';
 import ErrorScreen from '../../pages/error-screen/error-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
@@ -11,7 +11,7 @@ import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { useAppSelector } from '../../hooks';
-import Loading from '../loading/loading';
+import Loading from '../loader/loader';
 import ServerError from '../server-error/server-error';
 import { selectIsLoadedError, selectIsLoadedFilms } from '../../store/films-slice/selectors';
 import { selectAuthStatus } from '../../store/auth-slice/selectors';
@@ -38,19 +38,19 @@ const App = (): JSX.Element => {
       <Routes>
 
         <Route
-          path={AppRoute.Main}
+          path={RouteName.Main}
           element={
             <MainScreen />
           }
         />
 
         <Route
-          path={AppRoute.SignIn}
+          path={RouteName.SignIn}
           element={<LoginScreen/>}
         />
 
         <Route
-          path={AppRoute.MyList}
+          path={RouteName.MyList}
 
           element={
             <PrivateRoute >
@@ -60,22 +60,22 @@ const App = (): JSX.Element => {
         />
 
         <Route
-          path={AppRoute.Film}
+          path={RouteName.Film.path}
           element={<FilmScreen />}
         />
 
         <Route
-          path={AppRoute.AddReview}
+          path={RouteName.AddReview.path}
           element={<AddReviewScreen />}
         />
 
         <Route
-          path={AppRoute.Player}
+          path={RouteName.Player.path}
           element={<PlayerScreen />}
         />
 
         <Route
-          path="*"
+          path={RouteName.NotFound}
           element={<ErrorScreen />}
         />
 

@@ -5,8 +5,9 @@ import Footer from '../../components/footer/footer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectIsLoadedFilm, selectIsLoadedError } from '../../store/film-slice/selectors';
 import { fetchCommentsAction, fetchFilmAction, fetchSimilarFilmsAction } from '../../store/api-actions';
-import Loading from '../../components/loading/loading';
+import Loading from '../../components/loader/loader';
 import ServerError from '../../components/server-error/server-error';
+import FilmCardFull from '../../components/film-card-full/film-card-full';
 
 const FilmScreen = ():JSX.Element => {
   const params = useParams();
@@ -31,12 +32,17 @@ const FilmScreen = ():JSX.Element => {
     return <ServerError />;
   }
   return (
-    <div className="page-content">
+    <>
+      <FilmCardFull />
 
-      <SimilarFilms />
+      <div className="page-content">
 
-      <Footer />
-    </div>
+        <SimilarFilms />
+
+        <Footer />
+      </div>
+    </>
+
   );
 };
 

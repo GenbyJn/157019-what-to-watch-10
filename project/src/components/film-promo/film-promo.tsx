@@ -1,14 +1,15 @@
 import { useAppSelector } from '../../hooks';
 import { selectPromoFilm } from '../../store/promo-slice/selectors';
+import FilmCardDescription from '../film-card-description/film-card-description';
 import Logo from '../logo/logo';
 
 const FilmPromo = ():JSX.Element => {
   const filmPromo = useAppSelector(selectPromoFilm);
-
+  const {id, name, genre, released. isFavorite, posterImage, backgroundImage } = filmPromo;
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={ filmPromo?.backgroundImage } alt={ filmPromo?.name } />
+        <img src={ backgroundImage } alt={ name } />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -20,7 +21,7 @@ const FilmPromo = ():JSX.Element => {
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              <img src="img/avatar.jpg" alt={"User avatar"} width="63" height="63" />
             </div>
           </li>
           <li className="user-block__item">
@@ -32,32 +33,10 @@ const FilmPromo = ():JSX.Element => {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src={ filmPromo?.posterImage } alt={ filmPromo?.name } width="218" height="327" />
+            <img src={ posterImage } alt={ name } width="218" height="327" />
           </div>
 
-          <div className="film-card__desc">
-            <h2 className="film-card__title">{ filmPromo?.name }</h2>
-            <p className="film-card__meta">
-              <span className="film-card__genre">{ filmPromo?.genre } </span>
-              <span className="film-card__year">{ filmPromo?.released }</span>
-            </p>
-
-            <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list film-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-                <span className="film-card__count"> allFilmCardCount </span>
-              </button>
-            </div>
-          </div>
+          <FilmCardDescription id={id} name={name} genre={genre} released={released} isFavorite={isFavorite} />
         </div>
       </div>
     </section>

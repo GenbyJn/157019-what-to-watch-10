@@ -1,12 +1,18 @@
 export const SIMILAR_LIST_COUNT = 4;
 export const DEFAULT_GENRE = 'All genres';
+export const MAX_COUNT_GENRES = 9;
 export const FILMS_COUNT = 8;
 export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
 export const AUTH_TOKEN_KEY_NAME = 'wtw-token';
 export const REQUEST_TIMEOUT = 5000;
 export const TIMEOUT_SHOW_ERROR = 2000;
 export const PREVIEW_TIMEOUT = 1000;
-
+export const MAX_RATING = 10;
+export const DEFAULT_RATING = 0;
+export enum CommentLength {
+  Min = 50,
+  Max = 400,
+}
 
 export enum AppRoute {
   Main = '/',

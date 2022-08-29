@@ -1,14 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { Film } from '../../types/film';
+import { FilmsSliceState } from '../../types/state';
 import {DEFAULT_GENRE, NameSpace} from '../../utils/common';
 import {addFavoriteAction, fetchFilmsAction} from '../api-actions';
 
-type FilmsSliceState = {
-  genre: string
-  films: Film[]
-  isLoaded: boolean
-  isLoadError: boolean
-}
 
 const initialState: FilmsSliceState = {
   genre: DEFAULT_GENRE,

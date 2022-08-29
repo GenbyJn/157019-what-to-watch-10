@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import AddReview from '../../components/add-review/add-review';
-import Loading from '../../components/loading/loading';
+import Loading from '../../components/loader/loader';
 import Logo from '../../components/logo/logo';
 import ServerError from '../../components/server-error/server-error';
 import { useAppSelector } from '../../hooks';

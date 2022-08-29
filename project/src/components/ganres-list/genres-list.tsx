@@ -1,42 +1,57 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
+import {Link, useParams} from 'react-router-dom';
+import classNames from 'classnames';
+
+import {FILMS_COUNT, MAX_COUNT_GENRES, RouteName} from '../../utils/common';
+import {selectGenres} from '../../store/films-slice/selectors';
+import {changeGenre} from '../../store/films-slice/films-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre } from '../../store/films-slice/films-slice';
-import { selectGenres } from '../../store/films-slice/selectors';
+import { getGenreUrl } from '../../utils/urls';
 
-import { DEFAULT_GENRE, FILMS_COUNT } from '../../utils/common';
-
-type GenresListProps = {
+type GenreMenuProps = {
   onChangeShowCount: (value: number) => void;
 }
 
-const GenresList = ({onChangeShowCount}: GenresListProps): JSX.Element => {
+const GenresList = ({onChangeShowCount}: GenreMenuProps): JSX.Element => {
   const genres = useAppSelector(selectGenres);
+  const {genreName} = useParams();
   const dispatch = useAppDispatch();
-  const [activeGenre, setActiveGenre] = useState(DEFAULT_GENRE);
-  const genresTitles = [DEFAULT_GENRE, ...new Set(genres.map(( genre ) => genre))];
 
   useEffect(() => {
-    dispatch(changeGenre(activeGenre));
+    dispatch(changeGenre(genreName));
     onChangeShowCount(FILMS_COUNT);
-  });
+  }, [genreName, dispatch, onChangeShowCount]);
 
   return (
     <ul className="catalog__genres-list">
-      {( genresTitles ).map(( item ) =>
-        (
-          <li
-            key={ item }
-            className={ activeGenre === item ? 'catalog__genres-item catalog__genres-item--active' : 'catalog__genres-item'}
-          >
-            <a href="/#"
-              className="catalog__genres-link"
-              onClick={() => setActiveGenre(item)}
-            >{ item }
-            </a>
-          </li>
-        )
+      <li className={classNames(
+        'catalog__genres-item',
+        {'catalog__genres-item--active': !genreName}
       )}
+      >
+        <Link className="catalog__genres-link"
+          to={RouteName.Main}
+        >
+          All genres
+        </Link>
+      </li>
+      {
+        genres.map((genre) => (
+          <li className={classNames(
+            'catalog__genres-item',
+            {'catalog__genres-item--active': genreName === genre.toLowerCase()}
+          )}
+          key={genre}
+          data-testid="genre"
+          >
+            <Link className="catalog__genres-link"
+              to={getGenreUrl(genre)}
+            >
+              {genre}
+            </Link>
+          </li>
+        )).slice(0, MAX_COUNT_GENRES)
+      }
     </ul>
   );
 };

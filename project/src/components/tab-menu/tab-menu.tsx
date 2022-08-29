@@ -41,7 +41,9 @@ const TabMenu = ({currentFilm}: TabMenuProps): JSX.Element => {
           </li>
         </ul>
       </nav>
+
       {renderTabContent()}
+
     </>
   );
 };
