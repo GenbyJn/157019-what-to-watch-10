@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Film } from '../types/film';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AppRoute, TabName } from '../utils/common';
+import { APIRoute, AppRoute, RouteName, TabName } from '../utils/common';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { Comment, NewComment } from '../types/comment';
@@ -81,7 +81,7 @@ export const sendCommentAction = createAsyncThunk<Comment[], NewComment, {
   async ({filmId, comment, rating}, {dispatch, extra: api, rejectWithValue}) => {
     try {
       const {data} = await api.post<Comment[]>(`${APIRoute.Comments}/${filmId}`, {comment, rating});
-      dispatch(redirectToRoute(`${APIRoute.Films}/${filmId}?tab=${TabName.Reviews}`));
+      dispatch(redirectToRoute(`${RouteName.Film.name}/${filmId}?tab=${TabName.Reviews}`));
       return data;
     } catch (err) {
       const error = err as AxiosError<{ error: string }>;

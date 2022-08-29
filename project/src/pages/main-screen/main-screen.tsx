@@ -1,4 +1,4 @@
-import GenresList from '../../components/ganres-list/genres-list';
+import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks';
 import { FILMS_COUNT } from '../../utils/common';

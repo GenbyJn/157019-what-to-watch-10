@@ -91,4 +91,8 @@ export enum PlayType {
   Unknown = 'UNKNOWN',
 }
 
-
+export enum ErrorMessage {
+  SignInValidate = 'Check your username and password .',
+  IncorrectEmail = 'Check your email address',
+  ServerError = 'Server error'
+}

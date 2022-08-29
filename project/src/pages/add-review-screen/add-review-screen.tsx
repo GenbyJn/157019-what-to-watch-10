@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import AddReview from '../../components/add-review/add-review';
+import Header from '../../components/header/header';
 import Loading from '../../components/loader/loader';
-import Logo from '../../components/logo/logo';
 import ServerError from '../../components/server-error/server-error';
 import { useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import { selectFilm, selectIsLoadedError, selectIsLoadedFilm } from '../../store/film-slice/selectors';
+import { getAddReviewUrl, getFilmUrl } from '../../utils/urls';
 
 const AddReviewScreen = ():JSX.Element => {
   const params = useParams();
@@ -41,39 +42,35 @@ const AddReviewScreen = ():JSX.Element => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header">
-
-          <Logo/>
+        <Header>
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${ id }`} className="breadcrumbs__link">{ name }</Link>
+                <Link className="breadcrumbs__link"
+                  to={getFilmUrl(id)}
+                >
+                  {name}
+                </Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href="/#" className="breadcrumbs__link">Add review</a>
+                <Link className="breadcrumbs__link"
+                  to={getAddReviewUrl(id)}
+                >
+                  Add review
+                </Link>
               </li>
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/#" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
-        </header>
+        </Header>
 
         <div className="film-card__poster film-card__poster--small">
           <img src={ posterImage } alt="The Grand Budapest Hotel poster" width="218" height="327" />
         </div>
       </div>
 
-      <AddReview />
+      <AddReview filmId={id} />
 
     </section>
   );
