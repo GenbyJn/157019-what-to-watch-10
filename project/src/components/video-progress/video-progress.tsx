@@ -10,8 +10,7 @@ const VideoProgress = (props: VideoProgressProps): JSX.Element => {
   return (
     <div className="player__controls-row">
       <div className="player__time">
-        <input
-          className="player__progress"
+        <input className="player__progress"
           type="range"
           min="0"
           max="100"
@@ -19,8 +18,7 @@ const VideoProgress = (props: VideoProgressProps): JSX.Element => {
           onChange={ (evt) => onVideoProgress(evt.target.value) }
           data-testid="player-input"
         />
-        <progress
-          className="player__progress"
+        <progress className="player__progress"
           value={ progress }
           max="100"
           data-testid="player-progress"

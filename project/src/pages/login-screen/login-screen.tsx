@@ -50,8 +50,7 @@ const LogIn = (): JSX.Element => {
 
           <div className="sign-in__fields">
             <div className="sign-in__field">
-              <input
-                className="sign-in__input"
+              <input className="sign-in__input"
                 type="text"
                 placeholder="Email address"
                 name="user-email"
@@ -63,8 +62,7 @@ const LogIn = (): JSX.Element => {
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
-              <input
-                className="sign-in__input"
+              <input className="sign-in__input"
                 type="password"
                 placeholder="Password"
                 name="user-password"
@@ -77,8 +75,7 @@ const LogIn = (): JSX.Element => {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button
-              className="sign-in__btn"
+            <button className="sign-in__btn"
               type="submit"
               disabled={isSending}
             >
@@ -95,6 +92,6 @@ const LogIn = (): JSX.Element => {
       <Footer/>
     </div>
   );
-}
+};
 
 export default LogIn;

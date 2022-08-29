@@ -13,9 +13,8 @@ const VideoControl = (props: VideoControlProps): JSX.Element => {
       {
         isPlaying
           ? (
-            <button
+            <button className="player__play"
               type="button"
-              className="player__play"
               onClick={ onTogglePlay }
             >
               <svg viewBox="0 0 14 21" width="14" height="21">
@@ -25,9 +24,8 @@ const VideoControl = (props: VideoControlProps): JSX.Element => {
             </button>
           )
           : (
-            <button
+            <button className="player__play"
               type="button"
-              className="player__play"
               onClick={ onTogglePlay }
             >
               <svg viewBox="0 0 19 19" width="19" height="19">
@@ -39,9 +37,8 @@ const VideoControl = (props: VideoControlProps): JSX.Element => {
       }
       <div className="player__name">{ title }</div>
 
-      <button
+      <button className="player__full-screen"
         type="button"
-        className="player__full-screen"
         onClick={onToggleFullscreen}
       >
         <svg viewBox="0 0 27 27" width="27" height="27">

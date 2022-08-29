@@ -87,11 +87,9 @@ const PlayerScreen = (): JSX.Element => {
         onEndPlay={handleEndPlay}
       />
 
-      <Link
+      <Link className="player__exit"
         onClick={() => setIsPlaying(false)}
         to={playType === PlayType.Promo ? APIRoute.Main : getFilmUrl(id)}
-        className="player__exit"
-        data-testid="player-exit"
       >
         Exit
       </Link>
