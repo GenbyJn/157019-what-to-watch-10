@@ -5,7 +5,7 @@ import Logo from '../logo/logo';
 
 const FilmPromo = ():JSX.Element => {
   const filmPromo = useAppSelector(selectPromoFilm);
-  const {id, name, genre, released. isFavorite, posterImage, backgroundImage } = filmPromo;
+  const { id, name, genre, released, isFavorite, posterImage, backgroundImage } = filmPromo;
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -21,7 +21,7 @@ const FilmPromo = ():JSX.Element => {
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt={"User avatar"} width="63" height="63" />
+              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
             </div>
           </li>
           <li className="user-block__item">
