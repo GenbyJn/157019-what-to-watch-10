@@ -1,8 +1,9 @@
-import './style.css';
+import Spinner from '../spinner/spinner';
+import './loader.css';
 
 const Loader = (): JSX.Element => (
   <div className='loader'>
-    <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    <Spinner />
   </div>
 );
 

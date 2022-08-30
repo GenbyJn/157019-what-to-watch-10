@@ -6,6 +6,7 @@ import Logo from '../logo/logo';
 const FilmPromo = ():JSX.Element => {
   const filmPromo = useAppSelector(selectPromoFilm);
   const { id, name, genre, released, isFavorite, posterImage, backgroundImage } = filmPromo;
+
   return (
     <section className="film-card">
       <div className="film-card__bg">

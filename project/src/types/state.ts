@@ -2,6 +2,7 @@ import { AuthorizationStatus, PlayType } from './../utils/common';
 import { store } from '../store/index';
 import { Film } from './film';
 import { rootReducer } from '../store/root-reducer';
+import { Comment } from './common';
 
 export type Reducer = ReturnType<typeof rootReducer>;
 
@@ -51,3 +52,4 @@ export type FavoriteSliceState = {
 export type PlayerSliceState = {
   playType: PlayType,
 }
+

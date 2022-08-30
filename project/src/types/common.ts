@@ -21,3 +21,11 @@ export type RouteType = {
   path: string;
   element: JSX.Element;
 }
+
+export type UserData = {
+  id: number;
+  avatarUrl: string;
+  email: string;
+  name: string;
+  token: string;
+};
