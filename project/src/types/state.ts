@@ -1,6 +1,9 @@
 import { AuthorizationStatus, PlayType } from './../utils/common';
 import { store } from '../store/index';
 import { Film } from './film';
+import { rootReducer } from '../store/root-reducer';
+
+export type Reducer = ReturnType<typeof rootReducer>;
 
 export type State = ReturnType<typeof store.getState>;
 

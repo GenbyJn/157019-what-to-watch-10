@@ -16,6 +16,7 @@ import ServerError from '../server-error/server-error';
 import { selectIsLoadedError, selectIsLoadedFilms } from '../../store/films-slice/selectors';
 import { selectAuthStatus } from '../../store/auth-slice/selectors';
 import { selectIsPromoError } from '../../store/promo-slice/selectors';
+import { RouteType } from '../../types/common';
 
 
 const App = (): JSX.Element => {
@@ -24,6 +25,42 @@ const App = (): JSX.Element => {
   const isPromoLoaded = useAppSelector(selectIsLoadedError);
   const isErrorLoadPromo = useAppSelector(selectIsPromoError);
   const authStatus = useAppSelector(selectAuthStatus);
+  const routes: RouteType[] = [
+    {
+      path: RouteName.Main,
+      element: <MainScreen />
+    },
+    {
+      path: RouteName.SignIn,
+      element: <LoginScreen/>
+    },
+    {
+      path: RouteName.MyList,
+      element:(
+        <PrivateRoute >
+          <MyListScreen />
+        </PrivateRoute>)
+    },
+    {
+      path: RouteName.Film.path,
+      element: <FilmScreen />
+    },
+    {
+      path: RouteName.AddReview.path,
+      element: <AddReviewScreen />
+    },
+
+    {
+      path: RouteName.Player.path,
+      element: <PlayerScreen />
+    },
+
+    {
+      path: RouteName.NotFound,
+      element: <ErrorScreen />
+    },
+
+  ];
 
   if (authStatus === AuthorizationStatus.Unknown || isFilmsLoaded || isPromoLoaded) {
     return <Loading />;
@@ -32,55 +69,20 @@ const App = (): JSX.Element => {
   if (isErrorLoadFilms || isErrorLoadPromo) {
     return <ServerError/>;
   }
-
   return (
     <HistoryRouter history={ browserHistory }>
+
       <Routes>
-
-        <Route
-          path={RouteName.Main}
-          element={
-            <MainScreen />
-          }
-        />
-
-        <Route
-          path={RouteName.SignIn}
-          element={<LoginScreen/>}
-        />
-
-        <Route
-          path={RouteName.MyList}
-
-          element={
-            <PrivateRoute >
-              <MyListScreen />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path={RouteName.Film.path}
-          element={<FilmScreen />}
-        />
-
-        <Route
-          path={RouteName.AddReview.path}
-          element={<AddReviewScreen />}
-        />
-
-        <Route
-          path={RouteName.Player.path}
-          element={<PlayerScreen />}
-        />
-
-        <Route
-          path={RouteName.NotFound}
-          element={<ErrorScreen />}
-        />
-
+        {routes.map((route) =>(
+          <Route
+            key={route.path}
+            path={route.path}
+            element={route.element}
+          />))}
       </ Routes>
     </ HistoryRouter>
   );
 };
+
 export default App;
+

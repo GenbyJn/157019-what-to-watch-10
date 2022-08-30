@@ -16,3 +16,8 @@ export type NewComment = {
   comment: string;
   rating: number;
 }
+
+export type RouteType = {
+  path: string;
+  element: JSX.Element;
+}

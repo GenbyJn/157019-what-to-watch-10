@@ -65,6 +65,6 @@ const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
       </form>
     </div>
   );
-}
+};
 
 export default CommentForm;

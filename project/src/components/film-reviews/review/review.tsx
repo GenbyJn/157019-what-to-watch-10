@@ -1,4 +1,4 @@
-import {Comment} from '../../../types/comment';
+import {Comment} from '../../../types/common';
 import {formattingCommentDate} from '../../../utils/date';
 
 type ReviewProps = {
