@@ -10,7 +10,7 @@ type CommentFormType = {
   filmId: number;
 }
 
-const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
+const CommentForm = ({ filmId }: CommentFormType): JSX.Element => {
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(DEFAULT_RATING);
@@ -24,7 +24,7 @@ const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
 
   const handleCommentSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(sendCommentAction({filmId, comment, rating}));
+    dispatch(sendCommentAction({ filmId, comment, rating }));
   };
 
   return (

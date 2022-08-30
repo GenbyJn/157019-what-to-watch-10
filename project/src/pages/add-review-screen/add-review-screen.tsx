@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import AddReview from '../../components/add-review/add-review';
 import Header from '../../components/header/header';
 import Loading from '../../components/loader/loader';
 import ServerError from '../../components/server-error/server-error';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import { selectFilm, selectIsLoadedError, selectIsLoadedFilm } from '../../store/film-slice/selectors';
 import { getAddReviewUrl, getFilmUrl } from '../../utils/urls';
 
 const AddReviewScreen = ():JSX.Element => {
   const params = useParams();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const film = useAppSelector(selectFilm);
   const isLoading = useAppSelector(selectIsLoadedFilm);
   const isErrorLoadFilm = useAppSelector(selectIsLoadedError);
