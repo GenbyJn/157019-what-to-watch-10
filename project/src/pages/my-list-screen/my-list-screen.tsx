@@ -1,50 +1,50 @@
-import Logo from '../../components/logo/logo';
+import {useEffect} from 'react';
 import FilmsList from '../../components/films-list/films-list';
-import { Film } from '../../types/film';
+import {selectFavorites, selectIsLoadedError, selectIsLoadedFavorites} from '../../store/favorite-slice/selectors';
+import {fetchFavoritesAction} from '../../store/api-actions';
+import ServerError from '../../components/server-error/server-error';
+import Loader from '../../components/loader/loader';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import Footer from '../../components/footer/footer';
 
-type MyListProps = {
-  favoriteCardCount: string
-  filmsData: Film[]
-}
+function FavoriteFilms(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const favoriteFilms = useAppSelector(selectFavorites);
+  const isLoading = useAppSelector(selectIsLoadedFavorites);
+  const isErrorLoadFavorite = useAppSelector(selectIsLoadedError);
+  const favoriteCount = favoriteFilms.length;
 
-const MyListScreen = ({filmsData, favoriteCardCount}: MyListProps):JSX.Element => {
-  const favoriteFilms = filmsData.filter((item) => item.isFavorite);
-  favoriteCardCount = favoriteFilms.length.toString();
+  useEffect(() => {
+    dispatch(fetchFavoritesAction());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (isErrorLoadFavorite) {
+    return <ServerError/>;
+  }
 
   return (
     <div className="user-page">
-      <header className="page-header user-page__head">
 
-        <Logo/>
-
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{ favoriteCardCount }</span></h1>
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </li>
-          <li className="user-block__item">
-            <a href="/#" className="user-block__link">Sign out</a>
-          </li>
-        </ul>
+      <header className="user-page__head">
+        <h1 className="page-title user-page__title">
+          My list
+          <span className="user-page__film-count">{favoriteCount}</span>
+        </h1>
       </header>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList filmsData={ favoriteFilms } />
+        <FilmsList films={favoriteFilms}/>
       </section>
 
-      <footer className="page-footer">
-
-        <Logo/>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
-};
-export default MyListScreen;
+}
+
+export default FavoriteFilms;

@@ -1,97 +1,45 @@
-import Logo from '../../components/logo/logo';
-import GanesList from '../../components/ganres-list/ganres-list';
+import GenresList from '../../components/genres-list/genres-list';
 import FilmsList from '../../components/films-list/films-list';
-import {Film} from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import { FILMS_COUNT } from '../../utils/common';
+import Footer from '../../components/footer/footer';
+import FilmPromo from '../../components/film-promo/film-promo';
+import { useState } from 'react';
+import { selectFilterFilms } from '../../store/films-slice/selectors';
+import { Film } from '../../types/film';
+import ShowMore from '../../components/show-more/show-more';
 
-type MainScreenProps = {
-  promoFilm: Film
-  filmsData: Film[]
-}
 
-const MainScreen = ({ promoFilm, filmsData }: MainScreenProps): JSX.Element => {
-  const { name, posterImage, backgroundImage, genre, released} = promoFilm;
-
-  const filmCardCount = filmsData.length;
+const MainScreen = (): JSX.Element => {
+  const [showCount, setShowCount] = useState<number>(FILMS_COUNT);
+  const sortFilms = useAppSelector(selectFilterFilms);
+  // eslint-disable-next-line no-console
+  console.log(sortFilms);
+  const getFilmsList = (films: Film[]) => films.slice(0, showCount);
 
   return (
     <>
-      <section className="film-card">
-        <div className="film-card__bg">
-          <img src={ backgroundImage } alt={ name } />
-        </div>
-
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header film-card__head">
-
-          <Logo/>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/#" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
-        </header>
-
-        <div className="film-card__wrap">
-          <div className="film-card__info">
-            <div className="film-card__poster">
-              <img src={ posterImage } alt={ name } width="218" height="327" />
-            </div>
-
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{ name }</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{ genre }</span>
-                <span className="film-card__year">{ released }</span>
-              </p>
-
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{ filmCardCount }</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FilmPromo />
 
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GanesList />
+          <GenresList onChangeShowCount={setShowCount}/>
 
-          <FilmsList filmsData={filmsData} />
+          <FilmsList films={getFilmsList(sortFilms)} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {
+            sortFilms.length > showCount &&
+            <ShowMore
+              showCount={showCount}
+              onChangeShowCount={setShowCount}
+            />
+          }
+
         </section>
 
-        <footer className="page-footer">
-
-          <Logo/>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );

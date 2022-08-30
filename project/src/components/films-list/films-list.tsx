@@ -3,26 +3,26 @@ import { Film } from '../../types/film';
 import { useState } from 'react';
 
 type FilmsListProps = {
-  filmsData: Film[];
+  films: Film[]
 }
 
-const FilmsList = ({filmsData}: FilmsListProps): JSX.Element => {
+const FilmsList = ({films}: FilmsListProps): JSX.Element => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
-  const handleMouseOn = (id: number) => setActiveCard(id);
+  const handleMouseEnter = (id: number) => setActiveCard(id);
 
-  const handleMouseOut = (): void => setActiveCard(null);
+  const handleMouseLeave = (): void => setActiveCard(null);
 
   return (
     <div className="catalog__films-list">
-      {filmsData.map((film) =>
+      {films.map((film) =>
         (
           <SmallFilmCard
             key={film.id}
             film={film}
             activeCard={activeCard}
-            onMouseEnter={handleMouseOn}
-            onMouseLeave={handleMouseOut}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           />
         )
       )}

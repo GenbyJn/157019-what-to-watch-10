@@ -1,5 +1,3 @@
-export type Stars = string[];
-
 export type Film =
   {
   name: string;
@@ -11,7 +9,7 @@ export type Film =
   rating: number;
   scoresCount: number;
   director: string;
-  starring: Stars;
+  starring: string[];
   runTime: number;
   genre: string;
   released: number;

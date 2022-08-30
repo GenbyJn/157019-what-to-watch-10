@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
+import { RouteName } from '../../utils/common';
 
 const ErrorScreen = ():JSX.Element => (
   <div className="user-page">
@@ -12,16 +15,13 @@ const ErrorScreen = ():JSX.Element => (
       <div className="sign-in__message">
         <p> 404 Not Found </p>
       </div>
+      <Link to={RouteName.Main} className="to-back">
+          Go to home page
+      </Link>
     </div>
 
-    <footer className="page-footer">
+    <Footer/>
 
-      <Logo/>
-
-      <div className="copyright">
-        <p>© 2019 What to watch Ltd.</p>
-      </div>
-    </footer>
   </div>
 );
 

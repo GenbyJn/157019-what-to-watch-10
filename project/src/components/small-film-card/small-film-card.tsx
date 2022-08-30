@@ -1,36 +1,77 @@
+import {useEffect, useRef} from 'react';
+import {Link} from 'react-router-dom';
+import classNames from 'classnames';
+import { getFilmUrl } from '../../utils/urls';
 import { Film } from '../../types/film';
-import { Link, useNavigate } from 'react-router-dom';
-import VideoPlayer from '../video-player/video-player';
+import { PREVIEW_TIMEOUT } from '../../utils/common';
 
-type SmallFilmCardProps = {
-  film: Film
+type FilmCardProps = {
+  film: Film;
   activeCard: number | null;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-const SmallFilmCard = ({film, activeCard, onMouseEnter, onMouseLeave}: SmallFilmCardProps): JSX.Element => {
+const SmallFilmCard = (props: FilmCardProps): JSX.Element => {
+  const {film, activeCard, onMouseEnter, onMouseLeave} = props;
+  const {id, previewImage, previewVideoLink, name} = film;
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const isPlaying = film.id === activeCard;
-  const navigate = useNavigate();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (activeCard === id) {
+        videoRef.current?.play();
+      }
+    },
+    PREVIEW_TIMEOUT
+    );
+
+    if (activeCard !== id) {
+      videoRef.current?.pause();
+      videoRef.current?.load();
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [activeCard, id]);
 
   return (
     <article
-      className = "small-film-card catalog__films-card"
-      onMouseEnter = {() => onMouseEnter(film.id)}
-      onMouseLeave = {onMouseLeave}
-      onClick={() => navigate(`/films/${film.id}`)}
+      className={
+        classNames(
+          'small-film-card',
+          'catalog__films-card',
+          {'active': activeCard === id}
+        )
+      }
+      onMouseEnter={() => onMouseEnter(id)}
+      onMouseLeave={onMouseLeave}
+      data-testid="film-card"
     >
+      <Link
+        to={getFilmUrl(id)}
+        className="small-film-card__image"
+      >
+        <video
+          src={previewVideoLink}
+          poster={previewImage}
+          loop
+          muted
+          ref={videoRef}
+          width={270}
+          height={175}
+          data-testid="film-card-video"
+        />
+      </Link>
 
-      <div className="small-film-card__image">
-        {
-          isPlaying
-            ? < VideoPlayer film={film} activeCard={activeCard} />
-            : <img src={film.previewImage} alt={film.name} width="280" height="175" />
-        }
-      </div>
       <h3 className="small-film-card__title">
-        <Link to={`/films/${film.id}`} className="small-film-card__link">{film.name}</Link>
+        <Link
+          to={getFilmUrl(id)}
+          className="small-film-card__link"
+        >
+          {name}
+        </Link>
       </h3>
     </article>
   );
