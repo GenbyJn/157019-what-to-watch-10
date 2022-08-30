@@ -6,8 +6,8 @@ const FilmReviews = (): JSX.Element => {
   const comments = useAppSelector(selectComments);
 
   return (
-    <div className="film-card__row">
-      <div className="film-card__reviews">
+    <div className="film-card__reviews film-card__row">
+      <div className="film-card__reviews-col">
         {
           comments?.map((review, index) =>
             <Review key={review.id} review={review}/>)
