@@ -9,7 +9,7 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
-import { browserHistory } from '../../browser-history';
+
 import { useAppSelector } from '../../hooks';
 import Loading from '../loader/loader';
 import ServerError from '../server-error/server-error';
@@ -17,6 +17,7 @@ import { selectIsLoadedError, selectIsLoadedFilms } from '../../store/films-slic
 import { selectAuthStatus } from '../../store/auth-slice/selectors';
 import { selectIsPromoError } from '../../store/promo-slice/selectors';
 import { RouteType } from '../../types/common';
+import browserHistory from '../../browser-history';
 
 
 const App = (): JSX.Element => {

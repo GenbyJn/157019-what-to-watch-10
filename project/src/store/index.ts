@@ -3,7 +3,7 @@ import { rootReducer } from './root-reducer';
 import { configureStore } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
 
-export const api = createAPI(); // AxiosInstance
+export const api = createAPI();
 
 export const store = configureStore({
   reducer: rootReducer,
