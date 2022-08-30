@@ -1,12 +1,10 @@
 import {useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import classNames from 'classnames';
 
-import {FILMS_COUNT, MAX_COUNT_GENRES, RouteName} from '../../utils/common';
-import {selectGenres} from '../../store/films-slice/selectors';
+import { DEFAULT_GENRE, FILMS_COUNT, MAX_COUNT_GENRES } from '../../utils/common';
+import {selectActiveGenre, selectGenres} from '../../store/films-slice/selectors';
 import {changeGenre} from '../../store/films-slice/films-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getGenreUrl } from '../../utils/urls';
 
 type GenreMenuProps = {
   onChangeShowCount: (value: number) => void;
@@ -16,6 +14,11 @@ const GenresList = ({onChangeShowCount}: GenreMenuProps): JSX.Element => {
   const genres = useAppSelector(selectGenres);
   const {genreName} = useParams();
   const dispatch = useAppDispatch();
+  const activeGenre = useAppSelector(selectActiveGenre);
+
+  const genresList = [DEFAULT_GENRE, ...genres];
+  // eslint-disable-next-line no-console
+  console.log(genresList);
 
   useEffect(() => {
     dispatch(changeGenre(genreName));
@@ -24,28 +27,16 @@ const GenresList = ({onChangeShowCount}: GenreMenuProps): JSX.Element => {
 
   return (
     <ul className="catalog__genres-list">
-      <li className={classNames(
-        'catalog__genres-item',
-        {'catalog__genres-item--active': !genreName}
-      )}
-      >
-        <Link className="catalog__genres-link"
-          to={RouteName.Main}
-        >
-          All genres
-        </Link>
-      </li>
       {
-        genres.map((genre) => (
-          <li className={classNames(
-            'catalog__genres-item',
-            {'catalog__genres-item--active': genreName === genre.toLowerCase()}
-          )}
+        genresList.map((genre) => (
+          <li className={`
+          catalog__genres-item  ${activeGenre === genre ? 'catalog__genres-item--active' : ''}
+          `}
           key={genre}
-          data-testid="genre"
           >
             <Link className="catalog__genres-link"
-              to={getGenreUrl(genre)}
+              to=''
+              onClick={() => dispatch(changeGenre(genre))}
             >
               {genre}
             </Link>

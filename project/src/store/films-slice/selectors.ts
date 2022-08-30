@@ -16,7 +16,7 @@ export const selectFilterFilms = createSelector(
   (films, genre) =>
     genre === DEFAULT_GENRE
       ? films
-      : films.filter((item: Film) => item.genre.toLowerCase() === genre)
+      : films.filter((item: Film) => item.genre.toLowerCase() === genre.toLowerCase())
 );
 
 export const selectGenres = createSelector(
