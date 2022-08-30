@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import AddReview from '../../components/add-review/add-review';
+// import AddReview from '../../components/add-review/add-review';
+import CommentForm from '../../components/comment-form/comment-form';
 import Header from '../../components/header/header';
 import Loading from '../../components/loader/loader';
 import ServerError from '../../components/server-error/server-error';
@@ -69,7 +70,7 @@ const AddReviewScreen = ():JSX.Element => {
         </div>
       </div>
 
-      <AddReview filmId={id} />
+      <CommentForm filmId={id} />
 
     </section>
   );
