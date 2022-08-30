@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import {Footer, Header } from '../../components';
+
 import { RouteName } from '../../utils/common';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
@@ -8,6 +8,8 @@ import { selectAuthStatus, selectError, selectIsLoginSending } from '../../store
 import { setError} from '../../store/auth-slice/auth-slice';
 import { AuthorizationStatus } from '../../utils/common';
 import { signInValidator } from '../../utils/validator';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
 
 
 const LogIn = (): JSX.Element => {
