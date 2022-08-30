@@ -28,3 +28,4 @@ export const selectFavoritesCount = createSelector(
   selectFilms,
   (films) => films.filter((item) => item.isFavorite).length,
 );
+
