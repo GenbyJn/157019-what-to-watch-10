@@ -21,7 +21,7 @@ const FilmDetails = ({currentFilm}: FilmDetailsProps):JSX.Element => {
           <span className="film-card__details-value">
             {
               starring.map((item) =>
-                <span key={item} className="starting-row">{item},</span>)
+                <span key={item} className="starting-row">{item},<br/></span>)
             }
           </span>
         </p>

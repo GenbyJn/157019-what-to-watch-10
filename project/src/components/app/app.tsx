@@ -10,13 +10,14 @@ import PlayerScreen from '../../pages/player-screen/player-screen';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 
-import { useAppSelector } from '../../hooks';
-import Loading from '../loader/loader';
-import ServerError from '../server-error/server-error';
-import { selectIsLoadedError, selectIsLoadedFilms } from '../../store/films-slice/selectors';
+
 import { selectAuthStatus } from '../../store/auth-slice/selectors';
 import { selectIsPromoError } from '../../store/promo-slice/selectors';
 import browserHistory from '../../browser-history';
+import Loader from '../loader/loader';
+import ServerError from '../server-error/server-error';
+import { useAppSelector } from '../../hooks';
+import { selectIsLoadedError, selectIsLoadedFilms } from '../../store/films-slice/selectors';
 
 
 const App = (): JSX.Element => {
@@ -26,7 +27,7 @@ const App = (): JSX.Element => {
   const isErrorLoadPromo = useAppSelector(selectIsPromoError);
   const authStatus = useAppSelector(selectAuthStatus);
   if (authStatus === AuthorizationStatus.Unknown || isFilmsLoaded || isPromoLoaded) {
-    return <Loading />;
+    return <Loader />;
   }
   if (isErrorLoadFilms || isErrorLoadPromo) {
     return <ServerError/>;

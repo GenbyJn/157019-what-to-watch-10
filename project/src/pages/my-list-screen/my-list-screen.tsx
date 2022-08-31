@@ -6,6 +6,7 @@ import ServerError from '../../components/server-error/server-error';
 import Loader from '../../components/loader/loader';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
 
 function FavoriteFilms(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,12 +30,12 @@ function FavoriteFilms(): JSX.Element {
   return (
     <div className="user-page">
 
-      <header className="user-page__head">
+      <Header className="user-page__head">
         <h1 className="page-title user-page__title">
           My list
           <span className="user-page__film-count">{favoriteCount}</span>
         </h1>
-      </header>
+      </Header>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
