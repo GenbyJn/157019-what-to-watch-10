@@ -13,8 +13,7 @@ import ShowMore from '../../components/show-more/show-more';
 const MainScreen = (): JSX.Element => {
   const [showCount, setShowCount] = useState<number>(FILMS_COUNT);
   const sortFilms = useAppSelector(selectFilterFilms);
-  // eslint-disable-next-line no-console
-  console.log(sortFilms);
+
   const getFilmsList = (films: Film[]) => films.slice(0, showCount);
 
   return (

@@ -17,8 +17,6 @@ const GenresList = ({onChangeShowCount}: GenreMenuProps): JSX.Element => {
   const activeGenre = useAppSelector(selectActiveGenre);
 
   const genresList = [DEFAULT_GENRE, ...genres];
-  // eslint-disable-next-line no-console
-  console.log(genresList);
 
   useEffect(() => {
     dispatch(changeGenre(genreName));
