@@ -50,8 +50,7 @@ const Header = ({className, children}: HeaderProps): JSX.Element => {
                     </Link>
                   </li>
                   <li className="user-block__item">
-                    <div
-                      className="user-block__link"
+                    <div className="user-block__link"
                       onClick={handleLogout}
                     >
                       Sign out
