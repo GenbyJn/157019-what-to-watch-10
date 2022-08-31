@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectIsLoadedFilm, selectIsLoadedError } from '../../store/film-slice/selectors';
 import { fetchCommentsAction, fetchFilmAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import Loading from '../../components/loader/loader';
-import ServerError from '../../components/server-error/server-error';
 import FilmCardFull from '../../components/film-card-full/film-card-full';
+import ErrorScreen from '../error-screen/error-screen';
 
 const FilmScreen = ():JSX.Element => {
   const params = useParams();
@@ -29,7 +29,7 @@ const FilmScreen = ():JSX.Element => {
   }
 
   if (isErrorLoadFilm) {
-    return <ServerError />;
+    return <ErrorScreen />;
   }
   return (
     <>
