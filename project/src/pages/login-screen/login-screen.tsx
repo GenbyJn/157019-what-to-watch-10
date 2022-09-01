@@ -12,7 +12,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 
 
-const LogIn = (): JSX.Element => {
+const LoginScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(selectAuthStatus);
   const isSending = useAppSelector(selectIsLoginSending);
@@ -96,4 +96,4 @@ const LogIn = (): JSX.Element => {
   );
 };
 
-export default LogIn;
+export default LoginScreen;

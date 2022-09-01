@@ -3,6 +3,7 @@ import { selectFilm } from '../../store/film-slice/selectors';
 import FilmCardDescription from '../film-card-description/film-card-description';
 import Header from '../header/header';
 import TabMenu from '../tab-menu/tab-menu';
+
 const FilmCardFull = (): JSX.Element => {
 
   const film = useAppSelector(selectFilm);

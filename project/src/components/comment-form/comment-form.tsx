@@ -1,8 +1,7 @@
 import {FormEvent, useState} from 'react';
 import RatingSelect from './rating/rating';
-import {useAppDispatch} from '../../hooks/index';
+import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {sendCommentAction} from '../../store/api-actions';
-import {useAppSelector} from '../../hooks/index';
 import {selectCommentError, selectIsSendingComment} from '../../store/comments-slice/selectors';
 import {useValidComment} from '../../hooks/use-valid-comment';
 import {DEFAULT_RATING} from '../../utils/common';
@@ -11,7 +10,7 @@ type CommentFormType = {
   filmId: number;
 }
 
-function CommentForm({filmId}: CommentFormType): JSX.Element {
+const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(DEFAULT_RATING);
@@ -66,6 +65,6 @@ function CommentForm({filmId}: CommentFormType): JSX.Element {
       </form>
     </div>
   );
-}
+};
 
 export default CommentForm;

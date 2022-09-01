@@ -5,14 +5,14 @@ import { getFilmUrl } from '../../utils/urls';
 import { Film } from '../../types/film';
 import { PREVIEW_TIMEOUT } from '../../utils/common';
 
-type FilmCardProps = {
+type SmallFilmCardProps = {
   film: Film;
   activeCard: number | null;
   onMouseEnter: (id: number) => void;
   onMouseLeave: () => void;
 }
 
-const SmallFilmCard = (props: FilmCardProps): JSX.Element => {
+const SmallFilmCard = (props: SmallFilmCardProps): JSX.Element => {
   const {film, activeCard, onMouseEnter, onMouseLeave} = props;
   const {id, previewImage, previewVideoLink, name} = film;
   const videoRef = useRef<HTMLVideoElement | null>(null);

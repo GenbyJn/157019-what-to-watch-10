@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 
-function FavoriteFilms(): JSX.Element {
+const MyListScreen = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const favoriteFilms = useAppSelector(selectFavorites);
   const isLoading = useAppSelector(selectIsLoadedFavorites);
@@ -46,6 +46,6 @@ function FavoriteFilms(): JSX.Element {
       <Footer/>
     </div>
   );
-}
+};
 
-export default FavoriteFilms;
+export default MyListScreen;

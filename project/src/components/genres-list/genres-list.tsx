@@ -6,11 +6,11 @@ import {selectActiveGenre, selectGenres} from '../../store/films-slice/selectors
 import {changeGenre} from '../../store/films-slice/films-slice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-type GenreMenuProps = {
+type GenresListProps = {
   onChangeShowCount: (value: number) => void;
 }
 
-const GenresList = ({onChangeShowCount}: GenreMenuProps): JSX.Element => {
+const GenresList = ({onChangeShowCount}: GenresListProps): JSX.Element => {
   const genres = useAppSelector(selectGenres);
   const {genreName} = useParams();
   const dispatch = useAppDispatch();
