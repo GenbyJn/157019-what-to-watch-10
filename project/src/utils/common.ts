@@ -92,7 +92,7 @@ export enum PlayType {
 }
 
 export enum ErrorMessage {
-  SignInValidate = 'Check your username and password .',
-  IncorrectEmail = 'Check your email address',
+  SignInValidate = 'Check your username and password.',
+  IncorrectEmail = 'Please enter a valid email address',
   ServerError = 'Server error'
 }
