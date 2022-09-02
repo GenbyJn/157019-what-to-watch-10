@@ -18,8 +18,6 @@ const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
   const error = useAppSelector(selectCommentError);
   const isValidForm = useValidComment(comment, rating);
   const ratingItems = [...Array(MAX_RATING).keys()].map((i) => ++i).reverse();
-  // eslint-disable-next-line no-console
-  console.log(ratingItems);
   const onChangeRating = (value: string) => {
     setRating(parseInt(value, 10));
   };
