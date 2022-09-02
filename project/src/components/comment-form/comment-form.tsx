@@ -1,10 +1,10 @@
 import {FormEvent, useState} from 'react';
-import RatingSelect from './rating/rating';
+import RatingInput from './rating-input/rating-input';
 import {useAppDispatch, useAppSelector} from '../../hooks/index';
 import {sendCommentAction} from '../../store/api-actions';
 import {selectCommentError, selectIsSendingComment} from '../../store/comments-slice/selectors';
 import {useValidComment} from '../../hooks/use-valid-comment';
-import {DEFAULT_RATING} from '../../utils/common';
+import {DEFAULT_RATING, MAX_RATING} from '../../utils/common';
 
 type CommentFormType = {
   filmId: number;
@@ -17,7 +17,9 @@ const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
   const isSending = useAppSelector(selectIsSendingComment);
   const error = useAppSelector(selectCommentError);
   const isValidForm = useValidComment(comment, rating);
-
+  const ratingItems = [...Array(MAX_RATING).keys()].map((i) => ++i).reverse();
+  // eslint-disable-next-line no-console
+  console.log(ratingItems);
   const onChangeRating = (value: string) => {
     setRating(parseInt(value, 10));
   };
@@ -37,10 +39,19 @@ const CommentForm = ({filmId}: CommentFormType): JSX.Element => {
           </div>
         }
 
-        <RatingSelect
-          isSending={isSending}
-          onChangeRating={onChangeRating}
-        />
+        <div className="rating">
+          <div className="rating__stars">
+            {
+              ratingItems.map((score) => (
+                <RatingInput
+                  key={score}
+                  isSending={isSending}
+                  onChangeRating={onChangeRating}
+                  score={score}
+                />))
+            }
+          </div>
+        </div>
 
         <div className="add-review__text">
           <textarea
